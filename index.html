@@ -2,9 +2,9 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>DropChat</title>
-<meta name="description" content="DropChat – bald verfügbar." />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>DropChat – Geld unter Freunden, direkt im Chat</title>
+<meta name="description" content="DropChat: Ausgaben mit Freunden teilen, Forderungen schicken und direkt im Chat abrechnen." />
 <meta name="theme-color" content="#FFFFFF" />
 <link rel="icon" href="favicon.png" type="image/png" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -13,19 +13,126 @@
 <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <main class="teaser">
-    <div class="teaser-inhalt">
-      <h1 class="wortmarke">DropChat</h1>
-      <span class="badge">Bald verfügbar</span>
-      <p class="teaser-text">Geld unter Freunden – ohne Zettel, ohne Nachrechnen.</p>
-    </div>
-  </main>
+  <div class="start">
+    <!-- Zum Launch durch die Store-Links ersetzen (bzw. je nach Gerät weiterleiten). -->
+    <header class="banner">
+      <a class="app-laden" href="#">
+        <img class="app-logo" src="favicon.png" alt="" width="28" height="28" />
+        downloaden
+      </a>
+    </header>
 
-  <footer class="fusszeile">
-    <a href="impressum.html">Impressum</a>
-    <a href="datenschutz.html">Datenschutzerklärung</a>
-    <a href="agb.html">AGB</a>
-    <span class="fusszeile-marke">© 2026 DropChat FlexKapG</span>
-  </footer>
+    <!-- Beispiel-Gruppenchat, Aussehen 1:1 wie in der App. -->
+    <main class="chat" aria-label="Beispiel: Gruppenchat Skitrip in DropChat">
+      <p class="system" style="--i: 0">Lena hat die Gruppe „Skitrip“ erstellt.</p>
+
+      <p class="absender" style="--i: 1; color: #ae4467">Lena</p>
+      <div class="nachricht rein im-lauf" style="--i: 1">
+        <span class="avatar-platz"></span>
+        <div class="blase rein ecke-rein-erste">
+          <span class="text">Skipässe für alle sind gekauft</span>
+          <span class="meta">18:19</span>
+        </div>
+      </div>
+      <div class="nachricht rein" style="--i: 2">
+        <span class="avatar" style="background: #d4537e" aria-hidden="true">L</span>
+        <div class="geldkarte rein ecke-rein-letzte">
+          <div class="kopf-karte">
+            <span class="typ">
+              <span class="typ-symbol">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3z" /><path d="M9 8h6M9 12h6" /></svg>
+              </span>
+              Forderung
+            </span>
+            <span class="aktion" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V4" /><path d="M4 4h13l-2 4 2 4H4" /></svg>
+            </span>
+          </div>
+          <div class="betrag minus">−45,00 €</div>
+          <div class="betrag-label">das zahlst du</div>
+          <div class="drop">
+            <span class="drop-logo" style="background: #e3f0fb">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2e8bd4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20l6-10 4 6 2-3 6 7z" /></svg>
+            </span>
+            <span class="drop-haendler">
+              <span class="drop-name">Skiwelt</span>
+              <span class="drop-zeit">08:41</span>
+            </span>
+            <span class="drop-betrag">180,00 €</span>
+          </div>
+          <div class="fuss">
+            <span class="verteilung">
+              Verteilung anzeigen
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 6l5 5 5-5" stroke="#7c4deb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </span>
+            <span class="meta">18:20</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="absender" style="--i: 3; color: #2672ae">Jonas</p>
+      <div class="nachricht rein" style="--i: 3">
+        <span class="avatar" style="background: #2e8bd4" aria-hidden="true">J</span>
+        <div class="blase rein ecke-rein-allein">
+          <span class="text">Danke! Überweis ich dir gleich</span>
+          <span class="meta">18:31</span>
+        </div>
+      </div>
+
+      <div class="nachricht raus im-lauf" style="--i: 4">
+        <div class="geldkarte raus ecke-raus-erste">
+          <div class="kopf-karte">
+            <span class="typ">
+              <span class="typ-symbol">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3z" /><path d="M9 8h6M9 12h6" /></svg>
+              </span>
+              Forderung
+            </span>
+            <span class="aktion" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18" /><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" /></svg>
+            </span>
+          </div>
+          <div class="betrag plus">+72,00 €</div>
+          <div class="betrag-label">das bekommst du</div>
+          <div class="drop">
+            <span class="drop-logo" style="background: #fdede6">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#d85a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M17 3c-2 1-3 3.5-3 6.5V13h3v8" /></svg>
+            </span>
+            <span class="drop-haendler">
+              <span class="drop-name">Alpenblick</span>
+              <span class="drop-zeit">21:02</span>
+            </span>
+            <span class="drop-betrag">96,00 €</span>
+          </div>
+          <div class="fuss">
+            <span class="verteilung">
+              Verteilung anzeigen
+              <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 6l5 5 5-5" stroke="#7c4deb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </span>
+            <span class="meta">
+              21:40
+              <svg width="12" height="12" viewBox="0 0 16 11" fill="none" stroke="#8b5cf6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 6l3 3 6-7.5M7 8.5l.8.6L14 1.5" /></svg>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="nachricht raus" style="--i: 5">
+        <div class="blase raus ecke-raus-letzte">
+          <span class="text">Abendessen geht auf mich, teilen wir durch vier</span>
+          <span class="meta">
+            21:41
+            <svg width="12" height="12" viewBox="0 0 16 11" fill="none" stroke="#a8a29e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 6l3 3 6-7.5M7 8.5l.8.6L14 1.5" /></svg>
+          </span>
+        </div>
+      </div>
+    </main>
+
+    <footer class="fusszeile">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutzerklärung</a>
+      <a href="agb.html">AGB</a>
+      <span class="fusszeile-marke">© 2026 DropChat FlexKapG</span>
+    </footer>
+  </div>
 </body>
 </html>

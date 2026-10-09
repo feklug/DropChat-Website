@@ -72,39 +72,350 @@ body {
   }
 }
 
-/* ── Startseite (Teaser) ──────────────────────────────────── */
+/* ── Startseite: "App laden" + Gruppenchat ──────────────── */
+/* Fast alle Besucher kommen vom Handy. Die Seite ist deshalb EINE schmale
+   Spalte; am Desktop steht dieselbe Spalte mittig, links und rechts Weiß.
 
-.teaser {
-  flex: 1;
+   Der Chat übernimmt die Werte 1:1 aus der App (components/MessageBubble.tsx,
+   components/ChatHintergrund.tsx, screens/ChatDetailScreen.tsx). Ändert sich
+   dort etwas, gehört es hier nachgezogen. Schrift im Chat: die Systemschrift
+   wie in der App (auf dem iPhone San Francisco), nicht Inter. */
+
+:root {
+  --chat-bg: #fbfafe;
+  --rot: #dc2626;
+  --gruen: #059669;
+  --zeit: #78716c;
+  --in-rand: #ece8f3;
+  --out-bg: #ebe4fe;
+  --out-rand: #d9ccfb;
+  --trennlinie: #f0edf5;
+  --verteilung: #7c4deb;
+  --system-schrift: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', system-ui, sans-serif;
+}
+
+.start {
+  /* Alles auf einen Bildschirm: Knopf oben, Fußzeile unten, der Chat
+     füllt den Rest. Ist er höher als der Platz, sieht man – wie in der App –
+     die neuesten Nachrichten unten, die älteren verschwimmen oben. */
+  height: 100vh;
+  height: 100svh;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
+}
+
+/* Banner: nur der Knopf, bleibt beim Scrollen oben. */
+.banner {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  padding: 16px 16px 4px;
+}
+
+/* Wie die "Einladen"-Knöpfe in der App: helles Lila, Pille. */
+.app-laden {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 18px;
-  padding: 48px 24px 24px;
-  text-align: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 20px 0 8px;
+  border-radius: var(--r-full);
+  background: var(--accent-light);
+  border: 1px solid var(--accent-mid);
+  color: #6d3fd8;
+  font-family: var(--system-schrift);
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 0.15s var(--ease-out), opacity 0.15s var(--ease-out);
 }
 
-.teaser-inhalt {
+/* App-Icon mit abgerundeten Ecken wie auf dem Homescreen (~22 %). */
+.app-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 6.5px;
+  flex-shrink: 0;
+}
+
+.app-laden:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+/* Chat-Fläche wie in der App: chatBg + blasses Tropfen-Muster (Tropfen 13 px,
+   Kachel 68 px, Deckkraft 0.045). Oben und unten verschwimmt alles ins Weiß. */
+.chat {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 18px;
-  animation: auftauchen 0.7s var(--ease-out) both;
+  justify-content: flex-end;
+  padding: 0 16px 40px;
+  background-color: var(--chat-bg);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='68' height='68'%3E%3Cpath transform='translate(27.5 27.5) scale(0.5417)' d='M12 1.7c3.9 5.35 7.6 10.85 7.6 15.1 0 4.35-3.15 6.7-7.6 6.7s-7.6-2.35-7.6-6.7c0-4.25 3.7-9.75 7.6-15.1Z' fill='%238b5cf6' fill-opacity='0.045'/%3E%3C/svg%3E");
+  font-family: var(--system-schrift);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 120px, #000 calc(100% - 70px), transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 120px, #000 calc(100% - 70px), transparent 100%);
 }
 
-.wortmarke {
-  font-size: clamp(2.4rem, 9vw, 3.4rem);
-  font-weight: 800;
-  letter-spacing: -0.035em;
-  line-height: 1.05;
+/* Nachrichten erscheinen nacheinander (bei "Bewegung reduzieren" sofort). */
+.chat > * {
+  animation: auftauchen 0.5s var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 120ms + 150ms);
 }
 
-.teaser-text {
-  max-width: 34ch;
-  font-size: 15px;
+.system {
+  margin: 8px 24px 14px;
+  text-align: center;
+  font-size: 11.5px;
   font-weight: 500;
   color: var(--text-2);
+}
+
+.absender {
+  margin: 0 0 4px 46px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.nachricht {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.nachricht.im-lauf {
+  margin-bottom: 3px;
+}
+
+.nachricht.raus {
+  flex-direction: row-reverse;
+}
+
+.avatar,
+.avatar-platz {
+  width: 28px;
+  height: 28px;
+  flex-shrink: 0;
+}
+
+.avatar {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+/* Blasen: 20 px Rundung, 8 px zur Nachbarnachricht im Lauf, 6 px Spitze. */
+.blase {
+  max-width: 262px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  column-gap: 8px;
+}
+
+.blase.rein {
+  background: #fff;
+  border: 1px solid var(--in-rand);
+  box-shadow: 0 3px 8px rgba(28, 25, 23, 0.04);
+}
+
+.blase.raus {
+  background: var(--out-bg);
+}
+
+.text {
+  min-width: 0;
+  font-size: 15px;
+  line-height: 21px;
+  color: var(--text-1);
+}
+
+.meta {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  min-height: 16px;
+  font-size: 10.5px;
+  color: var(--zeit);
+}
+
+/* Forderung/Zahlung-Karte */
+.geldkarte {
+  width: 272px;
+  max-width: calc(100% - 34px);
+  padding: 12px 12px 10px;
+  border-radius: 20px;
+  background: #fff;
+}
+
+.geldkarte.rein {
+  border: 1px solid var(--in-rand);
+  box-shadow: 0 3px 8px rgba(28, 25, 23, 0.06);
+}
+
+.geldkarte.raus {
+  border: 1.5px solid var(--out-rand);
+  box-shadow: 0 3px 8px rgba(91, 33, 182, 0.08);
+}
+
+.ecke-rein-erste { border-bottom-left-radius: 8px; }
+.ecke-rein-mitte { border-top-left-radius: 8px; border-bottom-left-radius: 8px; }
+.ecke-rein-letzte { border-top-left-radius: 8px; border-bottom-left-radius: 6px; }
+.ecke-rein-allein { border-bottom-left-radius: 6px; }
+.ecke-raus-erste { border-bottom-right-radius: 8px; }
+.ecke-raus-letzte { border-top-right-radius: 8px; border-bottom-right-radius: 6px; }
+.ecke-raus-allein { border-bottom-right-radius: 6px; }
+
+.kopf-karte {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 32px;
+}
+
+.typ {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: -0.1px;
+}
+
+.typ-symbol {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--accent-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.aktion {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #fdecec;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.betrag {
+  margin-top: 8px;
+  font-size: 30px;
+  line-height: 34px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+}
+
+.betrag.minus { color: var(--rot); }
+.betrag.plus { color: var(--gruen); }
+
+.betrag-label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text-2);
+}
+
+/* Angehängter Drop – wie im Drops-Tab des Forderung-Sheets. */
+.drop {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 8px;
+  border-radius: var(--r-md);
+  border: 0.5px solid #000;
+  background: #fff;
+}
+
+.drop-logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.drop-haendler {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.drop-name {
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 800;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.drop-zeit {
+  flex-shrink: 0;
+  font-size: 11px;
+  color: var(--text-3);
+}
+
+.drop-betrag {
+  flex-shrink: 0;
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.fuss {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--trennlinie);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.verteilung {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 0;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--verteilung);
+}
+
+/* Fußzeile der Startseite liegt direkt unter dem verschwimmenden Chat. */
+.start .fusszeile {
+  flex-shrink: 0;
+  padding: 4px 20px 16px;
+  padding-bottom: max(16px, env(safe-area-inset-bottom));
+}
+
+/* Nachrichten nicht zusammenquetschen – lieber oben abschneiden. */
+.chat > * {
+  flex-shrink: 0;
 }
 
 @keyframes auftauchen {
