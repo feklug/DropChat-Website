@@ -44,6 +44,11 @@ html {
   scroll-behavior: smooth;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 body {
   /* Seite füllt immer mindestens die Höhe des Fensters, die Fußzeile sitzt
      unten. Wichtig für die Startseite: Impressum & Co. müssen ohne Scrollen
@@ -505,27 +510,74 @@ body {
   border: 1px solid var(--accent-mid);
 }
 
-/* ── Unterseiten: Kopf wie ein App-Screen ─────────────────── */
+/* ── Unterseiten: Blatt von unten, wie die App-Sheets ───────── */
+/* Wie components/BottomSheet.tsx: gleitet in 350 ms von unten hoch
+   (translateY 100 % -> 0, gleiche Kurve), oben 20 px abgerundet. Breite
+   wie die Startseite (max. 440 px), am Desktop mittig. */
+
+.blatt {
+  flex: 1;
+  width: 100%;
+  max-width: 440px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  border-radius: 20px 20px 0 0;
+  box-shadow: 0 -6px 28px rgba(28, 25, 23, 0.08);
+  animation: hochgleiten 0.35s var(--ease-out) both;
+}
+
+.ohne-animation .blatt {
+  animation: none;
+}
+
+.blatt.schliesst {
+  transform: translateY(100%);
+  transition: transform 0.32s var(--ease-out);
+}
+
+@keyframes hochgleiten {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
 
 .seite {
   flex: 1;
   width: 100%;
-  max-width: 680px;
-  margin: 0 auto;
-  padding: 0 20px 40px;
+  padding: 0 20px 24px;
 }
 
+/* Kopf wie KontoSettings/Statistiken in der App: Titel mittig (24 px, 700),
+   rechts runder Schließen-Knopf (36 px, bg-2, Pfeil nach unten). */
 .kopf {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 12px;
+  justify-content: flex-end;
   min-height: 64px;
   padding: 14px 0;
 }
 
-/* Runder Zurück-Knopf, identisch zu den Screens in der App
-   (36px, bg-2, zentriertes Chevron). */
-.zurueck {
+.kopf-titel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  padding: 0 52px;
+  text-align: center;
+  font-size: clamp(19px, 6vw, 24px);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  pointer-events: none;
+}
+
+.schliessen {
+  position: relative;
   width: 36px;
   height: 36px;
   border-radius: 18px;
@@ -539,24 +591,16 @@ body {
   transition: background 0.15s var(--ease-out);
 }
 
-.zurueck:hover,
-.zurueck:focus-visible {
-  background: var(--accent-light);
+/* Größere Tippfläche ohne den Knopf größer zu zeichnen. */
+.schliessen::after {
+  content: '';
+  position: absolute;
+  inset: -6px;
 }
 
-/* Optisch mittig trotz Zurück-Knopf links: Der Titel nimmt den Rest der
-   Zeile ein und bekommt rechts die Knopfbreite als Ausgleich. Bewusst NICHT
-   absolut positioniert – ein langer Titel wie "Datenschutzerklärung" würde
-   sonst unter dem Knopf liegen statt umzubrechen. */
-.kopf-titel {
-  flex: 1;
-  min-width: 0;
-  padding-right: 36px;
-  text-align: center;
-  font-size: clamp(19px, 5.5vw, 24px);
-  font-weight: 700;
-  letter-spacing: -0.5px;
-  line-height: 1.2;
+.schliessen:hover,
+.schliessen:focus-visible {
+  background: var(--accent-light);
 }
 
 .einleitung {

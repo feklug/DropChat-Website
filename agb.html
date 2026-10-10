@@ -11,16 +11,21 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="styles.css" />
+<script>
+  // Von einer anderen Rechtsseite kommend: nicht erneut hochgleiten.
+  if (/(impressum|datenschutz|agb)\.html/.test(document.referrer)) document.documentElement.classList.add('ohne-animation');
+</script>
 </head>
 <body>
+  <div class="blatt">
   <div class="seite">
     <header class="kopf">
-      <a class="zurueck" href="index.html" aria-label="Zurück zur Startseite">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <path d="M15 5l-7 7 7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      <h1 class="kopf-titel">AGB</h1>
+      <a class="schliessen" href="index.html" aria-label="AGB schließen">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+          <path d="M4 6l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
         </svg>
       </a>
-      <h1 class="kopf-titel">AGB</h1>
     </header>
 
     <section class="karte">
@@ -38,5 +43,26 @@
     <a href="agb.html" class="aktiv" aria-current="page">AGB</a>
     <span class="fusszeile-marke">© 2026 DropChat FlexKapG</span>
   </footer>
+  </div>
+  <script>
+    // Schließen wie in der App: Blatt gleitet nach unten, dann zurück zur
+    // Startseite (über den Verlauf, wenn man von dort kam – dann bleibt die
+    // Startseite, wie sie war).
+    (function () {
+      var knopf = document.querySelector('.schliessen');
+      var blatt = document.querySelector('.blatt');
+      if (!knopf || !blatt) return;
+      knopf.addEventListener('click', function (e) {
+        e.preventDefault();
+        var vonStartseite = document.referrer.indexOf(location.origin) === 0 &&
+          /\/(index\.html)?$/.test(new URL(document.referrer).pathname);
+        blatt.classList.add('schliesst');
+        setTimeout(function () {
+          if (vonStartseite && history.length > 1) history.back();
+          else location.href = knopf.getAttribute('href');
+        }, 320);
+      });
+    })();
+  </script>
 </body>
 </html>
