@@ -61,11 +61,28 @@
             <span class="drop-betrag">180,00 €</span>
           </div>
           <div class="fuss">
-            <span class="verteilung">
-              Verteilung anzeigen
+            <button type="button" class="verteilung" aria-expanded="false" aria-controls="verteilung-skiwelt">
+              <span class="verteilung-text">Verteilung anzeigen</span>
               <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 6l5 5 5-5" stroke="#7c4deb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-            </span>
+            </button>
             <span class="meta">18:20</span>
+          </div>
+          <div class="verteilung-liste" id="verteilung-skiwelt" hidden>
+            <div class="verteilung-zeile">
+              <span class="avatar avatar-klein" style="background: #6e5ad6" aria-hidden="true">D</span>
+              <span class="verteilung-name">von <b>Dir</b></span>
+              <span class="verteilung-betrag">45,00 €</span>
+            </div>
+            <div class="verteilung-zeile">
+              <span class="avatar avatar-klein" style="background: #2e8bd4" aria-hidden="true">J</span>
+              <span class="verteilung-name">von Jonas</span>
+              <span class="verteilung-betrag">45,00 €</span>
+            </div>
+            <div class="verteilung-zeile">
+              <span class="avatar avatar-klein" style="background: #3fa35a" aria-hidden="true">M</span>
+              <span class="verteilung-name">von Mia</span>
+              <span class="verteilung-betrag">45,00 €</span>
+            </div>
           </div>
         </div>
       </div>
@@ -105,14 +122,31 @@
             <span class="drop-betrag">96,00 €</span>
           </div>
           <div class="fuss">
-            <span class="verteilung">
-              Verteilung anzeigen
+            <button type="button" class="verteilung" aria-expanded="false" aria-controls="verteilung-alpenblick">
+              <span class="verteilung-text">Verteilung anzeigen</span>
               <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 6l5 5 5-5" stroke="#7c4deb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-            </span>
+            </button>
             <span class="meta">
               21:40
               <svg width="12" height="12" viewBox="0 0 16 11" fill="none" stroke="#8b5cf6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 6l3 3 6-7.5M7 8.5l.8.6L14 1.5" /></svg>
             </span>
+          </div>
+          <div class="verteilung-liste" id="verteilung-alpenblick" hidden>
+            <div class="verteilung-zeile">
+              <span class="avatar avatar-klein" style="background: #d4537e" aria-hidden="true">L</span>
+              <span class="verteilung-name">von Lena</span>
+              <span class="verteilung-betrag">24,00 €</span>
+            </div>
+            <div class="verteilung-zeile">
+              <span class="avatar avatar-klein" style="background: #2e8bd4" aria-hidden="true">J</span>
+              <span class="verteilung-name">von Jonas</span>
+              <span class="verteilung-betrag">24,00 €</span>
+            </div>
+            <div class="verteilung-zeile">
+              <span class="avatar avatar-klein" style="background: #3fa35a" aria-hidden="true">M</span>
+              <span class="verteilung-name">von Mia</span>
+              <span class="verteilung-betrag">24,00 €</span>
+            </div>
           </div>
         </div>
       </div>
@@ -134,5 +168,27 @@
       <span class="fusszeile-marke">© 2026 DropChat FlexKapG</span>
     </footer>
   </div>
+  <script>
+    // Wie in der App: Der Chat beginnt unten bei der neuesten Nachricht.
+    (function () {
+      var chat = document.querySelector('.chat');
+      if (!chat) return;
+      var nachUnten = function () { chat.scrollTop = chat.scrollHeight; };
+      nachUnten();
+      window.addEventListener('load', nachUnten);
+    })();
+
+    // "Verteilung anzeigen" wie in der App: klappt die Liste unter der Karte
+    // auf/zu, Text wechselt auf "ausblenden", der Pfeil dreht sich.
+    document.querySelectorAll('.verteilung').forEach(function (knopf) {
+      knopf.addEventListener('click', function () {
+        var liste = document.getElementById(knopf.getAttribute('aria-controls'));
+        var offen = knopf.getAttribute('aria-expanded') === 'true';
+        knopf.setAttribute('aria-expanded', String(!offen));
+        knopf.querySelector('.verteilung-text').textContent = offen ? 'Verteilung anzeigen' : 'Verteilung ausblenden';
+        if (liste) liste.hidden = offen;
+      });
+    });
+  </script>
 </body>
 </html>
