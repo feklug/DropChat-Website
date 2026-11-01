@@ -17,148 +17,29 @@
     <!-- Zum Launch durch die Store-Links ersetzen (bzw. je nach Gerät weiterleiten). -->
     <header class="banner">
       <a class="app-laden" href="#">
-        <img class="app-logo" src="favicon.png" alt="" width="28" height="28" />
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11" /><path d="M7 10.5l5 5 5-5" /><path d="M5 20h14" /></svg>
         downloaden
       </a>
     </header>
 
-    <!-- Beispiel-Gruppenchat, Aussehen 1:1 wie in der App. -->
-    <main class="chat" aria-label="Beispiel: Gruppenchat Skitrip in DropChat">
-      <p class="system" style="--i: 0">Lena hat die Gruppe „Skitrip“ erstellt.</p>
-
-      <p class="absender" style="--i: 1; color: #ae4467">Lena</p>
-      <div class="nachricht rein im-lauf" style="--i: 1">
-        <span class="avatar-platz"></span>
-        <div class="blase rein ecke-rein-erste">
-          <span class="text">Skipässe für alle sind gekauft</span>
-          <span class="meta">18:19</span>
-        </div>
-      </div>
-      <div class="nachricht rein" style="--i: 2">
-        <span class="avatar" style="background: #d4537e" aria-hidden="true">L</span>
-        <div class="geldkarte rein ecke-rein-letzte">
-          <div class="kopf-karte">
-            <span class="typ">
-              <span class="typ-symbol">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3z" /><path d="M9 8h6M9 12h6" /></svg>
-              </span>
-              Forderung
-            </span>
-            <span class="aktion" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22V4" /><path d="M4 4h13l-2 4 2 4H4" /></svg>
-            </span>
-          </div>
-          <div class="betrag minus">−45,00 €</div>
-          <div class="betrag-label">das zahlst du</div>
-          <div class="drop">
-            <span class="drop-logo" style="background: #e3f0fb">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2e8bd4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 20l6-10 4 6 2-3 6 7z" /></svg>
-            </span>
-            <span class="drop-haendler">
-              <span class="drop-name">Skiwelt</span>
-              <span class="drop-zeit">08:41</span>
-            </span>
-            <span class="drop-betrag">180,00 €</span>
-          </div>
-          <div class="fuss">
-            <button type="button" class="verteilung" aria-expanded="false" aria-controls="verteilung-skiwelt">
-              <span class="verteilung-text">Verteilung anzeigen</span>
-              <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 6l5 5 5-5" stroke="#7c4deb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-            </button>
-            <span class="meta">18:20</span>
-          </div>
-          <div class="verteilung-liste" id="verteilung-skiwelt" hidden>
-            <div class="verteilung-zeile">
-              <span class="avatar avatar-klein" style="background: #6e5ad6" aria-hidden="true">D</span>
-              <span class="verteilung-name">von <b>Dir</b></span>
-              <span class="verteilung-betrag">45,00 €</span>
-            </div>
-            <div class="verteilung-zeile">
-              <span class="avatar avatar-klein" style="background: #2e8bd4" aria-hidden="true">J</span>
-              <span class="verteilung-name">von Jonas</span>
-              <span class="verteilung-betrag">45,00 €</span>
-            </div>
-            <div class="verteilung-zeile">
-              <span class="avatar avatar-klein" style="background: #3fa35a" aria-hidden="true">M</span>
-              <span class="verteilung-name">von Mia</span>
-              <span class="verteilung-betrag">45,00 €</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <p class="absender" style="--i: 3; color: #2672ae">Jonas</p>
-      <div class="nachricht rein" style="--i: 3">
-        <span class="avatar" style="background: #2e8bd4" aria-hidden="true">J</span>
-        <div class="blase rein ecke-rein-allein">
-          <span class="text">Danke! Überweis ich dir gleich</span>
-          <span class="meta">18:31</span>
-        </div>
-      </div>
-
-      <div class="nachricht raus im-lauf" style="--i: 4">
-        <div class="geldkarte raus ecke-raus-erste">
-          <div class="kopf-karte">
-            <span class="typ">
-              <span class="typ-symbol">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2V3z" /><path d="M9 8h6M9 12h6" /></svg>
-              </span>
-              Forderung
-            </span>
-            <span class="aktion" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18" /><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" /><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6" /></svg>
-            </span>
-          </div>
-          <div class="betrag plus">+72,00 €</div>
-          <div class="betrag-label">das bekommst du</div>
-          <div class="drop">
-            <span class="drop-logo" style="background: #fdede6">
-              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#d85a30" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 3v8M5 3v5a2 2 0 0 0 4 0V3M7 11v10M17 3c-2 1-3 3.5-3 6.5V13h3v8" /></svg>
-            </span>
-            <span class="drop-haendler">
-              <span class="drop-name">Alpenblick</span>
-              <span class="drop-zeit">21:02</span>
-            </span>
-            <span class="drop-betrag">96,00 €</span>
-          </div>
-          <div class="fuss">
-            <button type="button" class="verteilung" aria-expanded="false" aria-controls="verteilung-alpenblick">
-              <span class="verteilung-text">Verteilung anzeigen</span>
-              <svg width="14" height="14" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 6l5 5 5-5" stroke="#7c4deb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-            </button>
-            <span class="meta">
-              21:40
-              <svg width="12" height="12" viewBox="0 0 16 11" fill="none" stroke="#8b5cf6" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 6l3 3 6-7.5M7 8.5l.8.6L14 1.5" /></svg>
-            </span>
-          </div>
-          <div class="verteilung-liste" id="verteilung-alpenblick" hidden>
-            <div class="verteilung-zeile">
-              <span class="avatar avatar-klein" style="background: #d4537e" aria-hidden="true">L</span>
-              <span class="verteilung-name">von Lena</span>
-              <span class="verteilung-betrag">24,00 €</span>
-            </div>
-            <div class="verteilung-zeile">
-              <span class="avatar avatar-klein" style="background: #2e8bd4" aria-hidden="true">J</span>
-              <span class="verteilung-name">von Jonas</span>
-              <span class="verteilung-betrag">24,00 €</span>
-            </div>
-            <div class="verteilung-zeile">
-              <span class="avatar avatar-klein" style="background: #3fa35a" aria-hidden="true">M</span>
-              <span class="verteilung-name">von Mia</span>
-              <span class="verteilung-betrag">24,00 €</span>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="nachricht raus" style="--i: 5">
-        <div class="blase raus ecke-raus-letzte">
-          <span class="text">Abendessen geht auf mich, teilen wir durch vier</span>
-          <span class="meta">
-            21:41
-            <svg width="12" height="12" viewBox="0 0 16 11" fill="none" stroke="#a8a29e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 6l3 3 6-7.5M7 8.5l.8.6L14 1.5" /></svg>
-          </span>
-        </div>
-      </div>
+    <!-- Erklärvideo (9:16), füllt den Platz zwischen Knopf und Rechtslinks.
+         Startet sofort – Browser erlauben Autoplay nur stumm, deshalb "Ton an". -->
+    <main class="video-bereich">
+      <video
+        class="erklaervideo"
+        src="video/dropchat-erklaervideo.mp4"
+        poster="video/dropchat-erklaervideo.jpg"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        aria-label="DropChat in einer Minute erklärt"
+      ></video>
+      <button type="button" class="ton-knopf" aria-pressed="false">
+        <svg class="ton-symbol" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z" /><path class="ton-wellen" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13" /><path class="ton-aus" d="M16 9l5 6M21 9l-5 6" /></svg>
+        <span class="ton-text">Ton an</span>
+      </button>
     </main>
 
     <footer class="fusszeile">
@@ -169,26 +50,43 @@
     </footer>
   </div>
   <script>
-    // Wie in der App: Der Chat beginnt unten bei der neuesten Nachricht.
+    // Erklärvideo: startet stumm (Autoplay-Regel der Browser). "Ton an" spielt es
+    // mit Stimme von vorne ab; Tippen aufs Video pausiert bzw. spielt weiter.
     (function () {
-      var chat = document.querySelector('.chat');
-      if (!chat) return;
-      var nachUnten = function () { chat.scrollTop = chat.scrollHeight; };
-      nachUnten();
-      window.addEventListener('load', nachUnten);
-    })();
-
-    // "Verteilung anzeigen" wie in der App: klappt die Liste unter der Karte
-    // auf/zu, Text wechselt auf "ausblenden", der Pfeil dreht sich.
-    document.querySelectorAll('.verteilung').forEach(function (knopf) {
+      var video = document.querySelector('.erklaervideo');
+      var knopf = document.querySelector('.ton-knopf');
+      if (!video || !knopf) return;
+      var text = knopf.querySelector('.ton-text');
+      var abspielen = function () {
+        var versuch = video.play();
+        if (versuch && versuch.catch) {
+          versuch.catch(function (fehler) {
+            // z. B. Stromsparmodus auf dem iPhone: dann startet es beim ersten Tippen.
+            console.warn('Video startet nicht automatisch', fehler);
+          });
+        }
+      };
+      var anzeigen = function () {
+        knopf.setAttribute('aria-pressed', String(!video.muted));
+        knopf.classList.toggle('an', !video.muted);
+        text.textContent = video.muted ? 'Ton an' : 'Ton aus';
+      };
       knopf.addEventListener('click', function () {
-        var liste = document.getElementById(knopf.getAttribute('aria-controls'));
-        var offen = knopf.getAttribute('aria-expanded') === 'true';
-        knopf.setAttribute('aria-expanded', String(!offen));
-        knopf.querySelector('.verteilung-text').textContent = offen ? 'Verteilung anzeigen' : 'Verteilung ausblenden';
-        if (liste) liste.hidden = offen;
+        if (video.muted) {
+          video.muted = false;
+          video.currentTime = 0;
+          abspielen();
+        } else {
+          video.muted = true;
+        }
+        anzeigen();
       });
-    });
+      video.addEventListener('click', function () {
+        if (video.paused) abspielen(); else video.pause();
+      });
+      abspielen();
+      anzeigen();
+    })();
   </script>
 </body>
 </html>

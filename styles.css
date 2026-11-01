@@ -110,46 +110,50 @@ body {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
-/* Banner: nur der Knopf, bleibt beim Scrollen oben. */
+/* Banner: nur der Knopf, als Ebene über dem Video (wie "Ton an" unten),
+   damit das Video die ganze Höhe bis zur Fußzeile nutzen kann. */
 .banner {
-  flex-shrink: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
   display: flex;
   justify-content: center;
-  padding: 16px 16px 4px;
+  padding: 14px 16px 0;
+  pointer-events: none;
+}
+
+.banner .app-laden {
+  pointer-events: auto;
 }
 
 /* Wie die "Einladen"-Knöpfe in der App: helles Lila, Pille. */
 .app-laden {
+  /* Gleiches Design wie der "Ton an"-Knopf über dem Video. */
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  min-height: 44px;
-  padding: 0 20px 0 8px;
+  gap: 7px;
+  min-height: 40px;
+  padding: 0 16px 0 13px;
   border-radius: var(--r-full);
   background: var(--accent-light);
   border: 1px solid var(--accent-mid);
   color: #6d3fd8;
   font-family: var(--system-schrift);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
   text-decoration: none;
+  box-shadow: 0 6px 18px rgba(28, 25, 23, 0.08);
   transition: transform 0.15s var(--ease-out), opacity 0.15s var(--ease-out);
 }
 
-/* App-Icon mit abgerundeten Ecken wie auf dem Homescreen (~22 %). */
-.app-logo {
-  width: 28px;
-  height: 28px;
-  border-radius: 6.5px;
-  flex-shrink: 0;
-}
-
 .app-laden:active {
-  transform: scale(0.98);
-  opacity: 0.9;
+  transform: scale(0.97);
 }
 
 /* Chat-Fläche wie in der App: chatBg + blasses Tropfen-Muster (Tropfen 13 px,
@@ -474,6 +478,62 @@ body {
   color: var(--text-1);
 }
 
+/* Erklärvideo statt Chat: füllt den Platz zwischen Knopf und Fußzeile und
+   behält 9:16. Video- und Seitenhintergrund sind beide weiß – deshalb ohne
+   Rahmen, Schatten und Rundung, damit es nahtlos in der Seite steht. */
+.video-bereich {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* width/height auto + max-*: der Player schrumpft im Seitenverhältnis des
+   Videos, egal ob Breite oder Höhe knapp ist – keine Streifen oben/unten. */
+.erklaervideo {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: 100%;
+  aspect-ratio: 9 / 16;
+  background: var(--bg);
+  cursor: pointer;
+}
+
+/* "Ton an": Pille wie der Download-Knopf, unten mittig über dem Video. */
+.ton-knopf {
+  position: absolute;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 40px;
+  padding: 0 16px 0 13px;
+  border-radius: var(--r-full);
+  background: var(--accent-light);
+  border: 1px solid var(--accent-mid);
+  color: #6d3fd8;
+  font-family: var(--system-schrift);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(28, 25, 23, 0.08);
+  transition: transform 0.15s var(--ease-out), opacity 0.15s var(--ease-out);
+}
+
+.ton-knopf:active {
+  transform: translateX(-50%) scale(0.97);
+}
+
+.ton-knopf .ton-wellen { display: none; }
+.ton-knopf.an .ton-wellen { display: inline; }
+.ton-knopf.an .ton-aus { display: none; }
+
 /* Fußzeile der Startseite liegt direkt unter dem verschwimmenden Chat. */
 .start .fusszeile {
   flex-shrink: 0;
@@ -636,7 +696,8 @@ body {
   color: var(--text-2);
 }
 
-.karte-text + .karte-text {
+.karte-text + .karte-text,
+.zeile + .karte-text {
   border-top: 1px solid var(--border);
 }
 
