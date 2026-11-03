@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>DropChat – Geld unter Freunden, direkt im Chat</title>
+<meta name="description" content="DropChat: Ausgaben mit Freunden teilen, Forderungen schicken und direkt im Chat abrechnen." />
+<meta name="theme-color" content="#FFFFFF" />
+<link rel="icon" href="favicon.png" type="image/png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="start">
+    <!-- Zum Launch durch die Store-Links ersetzen (bzw. je nach Gerät weiterleiten). -->
+    <header class="banner">
+      <a class="app-laden" href="#">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11" /><path d="M7 10.5l5 5 5-5" /><path d="M5 20h14" /></svg>
+        downloaden
+      </a>
+    </header>
+
+    <!-- Erklärvideo (9:16), füllt den Platz zwischen Knopf und Rechtslinks.
+         Startet sofort – Browser erlauben Autoplay nur stumm, deshalb "Ton an". -->
+    <main class="video-bereich">
+      <video
+        class="erklaervideo"
+        src="video/dropchat-erklaervideo.mp4"
+        poster="video/dropchat-erklaervideo.jpg"
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="auto"
+        aria-label="DropChat in einer Minute erklärt"
+      ></video>
+      <button type="button" class="ton-knopf" aria-pressed="false">
+        <svg class="ton-symbol" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4V5z" /><path class="ton-wellen" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13" /><path class="ton-aus" d="M16 9l5 6M21 9l-5 6" /></svg>
+        <span class="ton-text">Ton an</span>
+      </button>
+    </main>
+
+    <footer class="fusszeile">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutzerklärung</a>
+      <a href="agb.html">AGB</a>
+      <span class="fusszeile-marke">© 2026 DropChat FlexKapG</span>
+    </footer>
+  </div>
+  <script>
+    // Erklärvideo: startet stumm (Autoplay-Regel der Browser). "Ton an" spielt es
+    // mit Stimme von vorne ab; Tippen aufs Video pausiert bzw. spielt weiter.
+    (function () {
+      var video = document.querySelector('.erklaervideo');
+      var knopf = document.querySelector('.ton-knopf');
+      if (!video || !knopf) return;
+      var text = knopf.querySelector('.ton-text');
+      var abspielen = function () {
+        var versuch = video.play();
+        if (versuch && versuch.catch) {
+          versuch.catch(function (fehler) {
+            // z. B. Stromsparmodus auf dem iPhone: dann startet es beim ersten Tippen.
+            console.warn('Video startet nicht automatisch', fehler);
+          });
+        }
+      };
+      var anzeigen = function () {
+        knopf.setAttribute('aria-pressed', String(!video.muted));
+        knopf.classList.toggle('an', !video.muted);
+        text.textContent = video.muted ? 'Ton an' : 'Ton aus';
+      };
+      knopf.addEventListener('click', function () {
+        if (video.muted) {
+          video.muted = false;
+          video.currentTime = 0;
+          abspielen();
+        } else {
+          video.muted = true;
+        }
+        anzeigen();
+      });
+      video.addEventListener('click', function () {
+        if (video.paused) abspielen(); else video.pause();
+      });
+      abspielen();
+      anzeigen();
+    })();
+  </script>
+</body>
+</html>
