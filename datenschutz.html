@@ -28,11 +28,479 @@
       </a>
     </header>
 
+    <p class="einleitung">
+      Datenschutzerklärung für die mobile Applikation und Website von DropChat. Fassung gültig ab 1.11.2026.
+    </p>
+
+    <h2 class="abschnitt-titel">1. Rechtlicher Rahmen und Unternehmensangaben</h2>
     <section class="karte">
-      <div class="platzhalter">
-        <span class="badge">In Arbeit</span>
-        <p class="platzhalter-titel">Die Datenschutzerklärung wird gerade erstellt.</p>
-        <p class="platzhalter-text">Sobald DropChat verfügbar ist, steht hier, welche Daten wir verarbeiten, wozu und wie lange. Bis dahin erreichst du uns bei Fragen über die Adresse im Impressum.</p>
+      <p class="karte-text">Die mobile Applikation DropChat sowie das zugehörige Webportal unter <a href="https://getdrop.chat">https://getdrop.chat</a> werden von der DropChat FlexKapG betrieben. Gegenstand des Unternehmens ist die Bereitstellung einer kollaborativen Softwareinfrastruktur zur Dokumentation, Aufteilung und rechnerischen Verrechnung privater Auslagen unter natürlichen Personen. Die Betreiberin erbringt weder Zahlungsdienste im Sinne des Zahlungsdienstegesetzes 2018 (ZaDiG 2018) noch Bankgeschäfte im Sinne des Bankwesengesetzes (BWG) und führt keine treuhänderische Verwahrung von Geldern oder Veranlassung von Zahlungstransaktionen durch. Ebenso wenig wird ein Inkassogewerbe nach § 118 GewO betrieben.</p>
+      <div class="karte-text">
+        <p>Verantwortliche Stelle für die Verarbeitungen personenbezogener Daten im Sinne des Art. 4 Nr. 7 der Verordnung (EU) 2016/679 (Datenschutz-Grundverordnung, nachfolgend DSGVO) sowie des österreichischen Datenschutzgesetzes (DSG) ist die:</p>
+        <p class="karte-anschrift">
+          <strong>DropChat FlexKapG</strong><br />
+          Kaasgrabengasse 75/3, 1190 Wien, Österreich<br />
+          Firmenbuchnummer: FN 687084v<br />
+          Firmenbuchgericht: Handelsgericht Wien<br />
+          Zuständige Gewerbebehörde: Magistratisches Bezirksamt für den 18./19. Bezirk<br />
+          Mitgliedschaft: Wirtschaftskammer Wien, Fachgruppe UBIT<br />
+          E-Mail-Kontakt: <a href="mailto:info@getdrop.chat">info@getdrop.chat</a>
+        </p>
+      </div>
+      <p class="karte-text">Die Inanspruchnahme der Dienste richtet sich an Verbraucher im Sinne des § 1 Abs. 1 Z 2 KSchG. In Übereinstimmung mit § 3 Abs. 4 der Allgemeinen Geschäftsbedingungen (AGB) von DropChat sowie § 4 Abs. 4 DSG setzt die rechtswirksame Nutzung der Dienste die Vollendung des 14. Lebensjahres voraus. Eine Registrierung oder Übermittlung von Daten durch Personen vor Vollendung dieses Alters ist unzulässig.</p>
+    </section>
+
+    <h2 class="abschnitt-titel">2. Systemarchitektur, Datenfluss und technische Sicherheitsmaßnahmen</h2>
+    <section class="karte">
+      <p class="karte-text">Die Bereitstellung der App DropChat und der Website stützt sich auf eine verteilte Cloud-Infrastruktur, die nach den Prinzipien des Privacy by Design und Privacy by Default gemäß Art. 25 DSGVO konzipiert ist. Die technische Gesamtarchitektur erfordert für ihren Betrieb das koordinierte Zusammenspiel spezialisierter Infrastrukturkomponenten, die vom Primärdatenspeicher über Schnittstellen für Kontoinformationen bis hin zu externen Sprachmodellen reichen.</p>
+      <p class="karte-text">Im Rahmen der Systemarchitektur kommuniziert die auf dem Endgerät ausgeführte Applikation direkt mit ausgewählten Drittsystemen: Das Bank-Login erfolgt isoliert über die Schnittstelle der finAPI GmbH, Fehlerprotokolle werden an Sentry (Functional Software, Inc.) übertragen, und Händlerlogos werden clientseitig über Google LLC geladen. Der zentrale Datenbestand, die Benutzerverwaltung und die Anwendungslogik werden über die Backend-Infrastruktur von Supabase bereitgestellt. Von dort aus erfolgt das automatisierte Routing spezifischer Datenfragmente an nachgelagerte Dienste: Segmentierte Transaktionsdaten werden über eine Schnittstelle an Anthropic, PBC übermittelt, Push-Mitteilungen über Expo sowie Apple bzw. Google ausgeliefert, Systemnachrichten über Zoho Mail versendet und SMS-Verifizierungscodes über Twilio Inc. zugestellt.</p>
+      <p class="karte-text">Die Sicherung der verarbeiteten Datenbestände erfolgt auf Basis adäquater technischer und organisatorischer Maßnahmen nach Art. 32 DSGVO: Sämtliche Kommunikationsprozesse zwischen dem Endgerät der Nutzer und den Cloud-Endpunkten werden über TLS 1.2 und TLS 1.3 verschlüsselt. Datenbankbestände sowie automatisierte System-Snapshots bei Supabase unterliegen einer lückenlosen hardware- oder softwaregestützten AES-256-Verschlüsselung im Ruhezustand (At-Rest).</p>
+      <p class="karte-text">Auf Ebene des Dateispeichers implementiert das System eine strikte Segregation zwischen öffentlichen und privaten Datenbereichen. Während Nutzerprofilbilder in einem öffentlichen Speichersegment verwahrt werden, um eine latenzfreie Anzeige in Feeds und Gruppenchats zu gewährleisten, lagern Transaktionsbelege und Fotos privater Ausgaben („Drops“) in einem isolierten, privaten Speicherbereich. Der Zugriff auf private Bilddokumente wird softwareseitig über zeitlich eng begrenzte, kryptografisch signierte Internetadressen (signierte URLs) gesteuert und ausschließlich authentifizierten Nutzern mit einer verifizierten Chat- oder Gruppenberechtigung gewährt. Passwörter werden niemals in lesbarer Form, sondern ausschließlich als kryptografische Hashes über das Authentifizierungsmodul von Supabase gespeichert.</p>
+    </section>
+
+    <h2 class="abschnitt-titel">3. Datenverarbeitungsprozesse und Rechtsgrundlagen</h2>
+    <section class="karte">
+      <p class="karte-text">Die Verarbeitung personenbezogener Daten im Rahmen der DropChat-Applikation und des Webportals unterteilt sich in folgende strukturierte Verarbeitungsbereiche:</p>
+      <div class="karte-text">
+        <h3 class="bereich-titel">Webserver-Logfiles</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>IP-Adresse des Endgeräts, Datum und Uhrzeit des Abrufs, aufgerufene URL und Dateiname, Browsertyp, Betriebssystem, HTTP-Statuscode.</dd>
+          <dt>Zweck</dt>
+          <dd>Bereitstellung der Website <a href="https://getdrop.chat">https://getdrop.chat</a>, Sicherstellung des störungsfreien Betriebs, Fehlerbehebung und Schutz vor Cyberangriffen.</dd>
+          <dt>Rechtsgrundlage</dt>
+          <dd>Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der IT-Sicherheit und Systemintegrität).</dd>
+          <dt>Empfänger</dt>
+          <dd>Webhosting-Provider.</dd>
+        </dl>
+      </div>
+      <div class="karte-text">
+        <h3 class="bereich-titel">Interne Identifikatoren</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>Systemweit eindeutig generierte Kennungen für Personen und Benutzerkonten.</dd>
+          <dt>Zweck</dt>
+          <dd>Zuordnung aller Datensätze, Rechte, Mitgliedschaften und Verrechnungsoperationen.</dd>
+          <dt>Rechtsgrundlage</dt>
+          <dd>Art. 6 Abs. 1 lit. b DSGVO (Erfüllung des Nutzungsvertrags).</dd>
+          <dt>Empfänger</dt>
+          <dd>Supabase; in pseudonymisierter Form Functional Software, Inc. (Sentry).</dd>
+        </dl>
+      </div>
+      <div class="karte-text">
+        <h3 class="bereich-titel">Konto- und Profildaten</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>Anzeigename, frei wählbarer Benutzername, QR-Freundescode, Profilbild, Avatarfarbe, Ländereinstellung, Spracheinstellung.</dd>
+          <dt>Zweck</dt>
+          <dd>Benutzerregistrierung, Bereitstellung der Profilfunktionen, Kontaktsuche und Lokalisierung der Darstellung.</dd>
+          <dt>Rechtsgrundlage</dt>
+          <dd>Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung).</dd>
+          <dt>Empfänger</dt>
+          <dd>Supabase; im Rahmen von Benachrichtigungen auch Push-Zustelldienste (Expo, Apple, Google).</dd>
+        </dl>
+      </div>
+      <div class="karte-text">
+        <h3 class="bereich-titel">Authentifizierungsdaten</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>Telefonnummer, E-Mail-Adresse, kryptografischer Passwort-Hash, Einweg-Hashwert der Mobilfunknummer (SHA-256), Status der Zwei-Faktor-Authentifizierung.</dd>
+          <dt>Zweck</dt>
+          <dd>Sichere Authentifizierung beim Login, Versand von Einmal-Sicherheitscodes (OTP), Zurücksetzen des Zugangskennworts.</dd>
+          <dt>Rechtsgrundlage</dt>
+          <dd>Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung) sowie Art. 6 Abs. 1 lit. f DSGVO (Sicherheit der Kontozugänge).</dd>
+          <dt>Empfänger</dt>
+          <dd>Supabase (Authentifizierungsmodul), Zoho Mail, Twilio Inc. (SMS-Gateway).</dd>
+        </dl>
+      </div>
+      <div class="karte-text">
+        <h3 class="bereich-titel">Hochschul-Zugehörigkeit</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>Hochschulkennung, offizielle Campus-E-Mail-Adresse, Prüfcode-Hash, Zeitstempel der Bestätigung.</dd>
+          <dt>Zweck</dt>
+          <dd>Verifikation des Studierendenstatus und Generierung aggregierter Hochschul-Auswertungen.</dd>
+          <dt>Rechtsgrundlage</dt>
+          <dd>Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung).</dd>
+          <dt>Empfänger</dt>
+          <dd>Supabase, Zoho Mail (Zustellung des Verifizierungscodes).</dd>
+        </dl>
+      </div>
+      <div class="karte-text">
+        <h3 class="bereich-titel">Bankverbindungs-Metadaten</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>Technische finAPI-Benutzerkennung, Bankleitzahl/BIC, Kontotyp, maskierte IBAN, Saldo, Ablaufdatum der Abruferlaubnis.</dd>
+          <dt>Zweck</dt>
+          <dd>Verwaltung der Kontobindung nach PSD2, Kontostandsverlauf, Erinnerung an die Erneuerung der Zugriffserlaubnis.</dd>
+          <dt>Rechtsgrundlage</dt>
+          <dd>Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung).</dd>
+          <dt>Empfänger</dt>
+          <dd>finAPI GmbH, Supabase.</dd>
+        </dl>
+      </div>
+      <div class="karte-text">
+        <h3 class="bereich-titel">Umsatz- und Buchungsdaten</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>Buchungsbetrag, Zeitstempel, Buchungsstatus, Name der Gegenpartei, IBAN der Gegenpartei, Kontostand nach Buchung, Ausgabengrößenklasse.</dd>
+          <dt>Zweck</dt>
+          <dd>Import und Verwaltung von Ausgaben („Drops“), Ausgabensplitting in Gruppen, Verrechnung von Verbindlichkeiten.</dd>
+          <dt>Rechtsgrundlage</dt>
+          <dd>Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung).</dd>
+          <dt>Empfänger</dt>
+          <dd>finAPI GmbH, Supabase; berechtigte Gruppen- und Chatmitglieder.</dd>
+        </dl>
+      </div>
+      <div class="karte-text">
+        <h3 class="bereich-titel">Kategorisierung und Händlererkennung</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>Bereinigter Verwendungszweck, Gegenparteiname, Indikatoren für das Vorhandensein einer IBAN bzw. Gläubiger-Identifikationsnummer.</dd>
+          <dt>Zweck</dt>
+          <dd>Automatisierte Ermittlung von Firmennamen und Zuweisung passender Ausgabenkategorien.</dd>
+          <dt>Rechtsgrundlage</dt>
+          <dd>Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung) sowie Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an strukturierter Belegerfassung).</dd>
+          <dt>Empfänger</dt>
+          <dd>Anthropic, PBC (Claude API).</dd>
+        </dl>
+      </div>
+      <div class="karte-text">
+        <h3 class="bereich-titel">Händler-Grafiken</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>Extrahierte Internetdomain des Händlers, IP-Adresse des anfragenden Mobilgeräts, Browser-Informationen.</dd>
+          <dt>Zweck</dt>
+          <dd>Grafische Aufbereitung der Ausgabenlisten mit Symbolen und Firmenlogos.</dd>
+          <dt>Rechtsgrundlage</dt>
+          <dd>Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an ansprechender Benutzeroberfläche).</dd>
+          <dt>Empfänger</dt>
+          <dd>Google LLC (Favicon Service).</dd>
+        </dl>
+      </div>
+      <div class="karte-text">
+        <h3 class="bereich-titel">Chat- und Kollaborationsdaten</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>Chat-Identifikatoren, Teilnehmermetadaten, Nachrichtentexte, Lesebestätigungen, Systemereignisse.</dd>
+          <dt>Zweck</dt>
+          <dd>Bereitstellung von Gruppen- und Einzelchats, Abstimmung von Rechnungen.</dd>
+          <dt>Rechtsgrundlage</dt>
+          <dd>Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung).</dd>
+          <dt>Empfänger</dt>
+          <dd>Supabase; Push-Dienste (Auszug der Nachricht).</dd>
+        </dl>
+      </div>
+      <div class="karte-text">
+        <h3 class="bereich-titel">Saldoverrechnung und Rechnungsanteile</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>Geteilte Gesamtausgaben, Kostenquoten je Person, eingetragene Rückzahlungen, Saldenverrechnungsdaten, Auszahlungs-IBAN.</dd>
+          <dt>Zweck</dt>
+          <dd>Mathematische Aufteilung und Ermittlung wechselseitiger Forderungen und Verbindlichkeiten.</dd>
+          <dt>Rechtsgrundlage</dt>
+          <dd>Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung).</dd>
+          <dt>Empfänger</dt>
+          <dd>Supabase; jeweilige Verrechnungspartner.</dd>
+        </dl>
+      </div>
+      <div class="karte-text">
+        <h3 class="bereich-titel">Transaktionsabgleich für Rückzahlungen</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>Betrag, Absendername und IBAN eingegangener Banküberweisungen.</dd>
+          <dt>Zweck</dt>
+          <dd>Automatisierter Abgleich zur Feststellung und Quittierung beglichener Privatschulden.</dd>
+          <dt>Rechtsgrundlage</dt>
+          <dd>Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung).</dd>
+          <dt>Empfänger</dt>
+          <dd>Supabase (rein serverseitiger Vergleich).</dd>
+        </dl>
+      </div>
+      <div class="karte-text">
+        <h3 class="bereich-titel">Interaktions- und Feeddaten</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>Freundschaftsverknüpfungen, Sperrvermerke, Emoji-Reaktionen, Lesestatus und Beitragsreichweiten.</dd>
+          <dt>Zweck</dt>
+          <dd>Bereitstellung des gemeinsamen Aktivitäts-Feeds und sozialer Feedback-Möglichkeiten.</dd>
+          <dt>Rechtsgrundlage</dt>
+          <dd>Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung).</dd>
+          <dt>Empfänger</dt>
+          <dd>Supabase; durch den Nutzer berechtigte Kontakte.</dd>
+        </dl>
+      </div>
+      <div class="karte-text">
+        <h3 class="bereich-titel">Telemetrie und Onboarding</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>Aufgerufene App-Ansichten, Verweildauern, Abbruchschritte im Onboarding, Interaktionsschritte bei der Bankanbindung, Teilen-Ereignisse.</dd>
+          <dt>Zweck</dt>
+          <dd>Erkennung von Bedienproblemen, Optimierung der App-Performance und Datenbasis für Nutzungseinstufungen.</dd>
+          <dt>Rechtsgrundlage</dt>
+          <dd>Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an Stabilität und Benutzerfreundlichkeit).</dd>
+          <dt>Empfänger</dt>
+          <dd>Supabase (rein proprietär verarbeitet).</dd>
+        </dl>
+      </div>
+      <div class="karte-text">
+        <h3 class="bereich-titel">Nutzungsbasierte Kontobewertung</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>Nutzungsmetriken, Aktivitäts-Score, Einstufungsergebnis („Abonnement erforderlich“ bzw. „Gratis-Zugang verbleibend“).</dd>
+          <dt>Zweck</dt>
+          <dd>Periodische Prüfung der weiteren unentgeltlichen Nutzbarkeit der App.</dd>
+          <dt>Rechtsgrundlage</dt>
+          <dd>Art. 6 Abs. 1 lit. b i.V.m. Art. 22 Abs. 2 lit. a DSGVO.</dd>
+          <dt>Empfänger</dt>
+          <dd>Supabase.</dd>
+        </dl>
+      </div>
+      <div class="karte-text">
+        <h3 class="bereich-titel">Systemstabilität und Fehlerberichte</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>Pseudonyme Personen-Kennung, Gerätemodell, Betriebssystem, App-Version, Fehlermeldung, maskierte IP-Adresse.</dd>
+          <dt>Zweck</dt>
+          <dd>Schnelle Behebung von Softwarefehlern und Gewährleistung der Systemstabilität.</dd>
+          <dt>Rechtsgrundlage</dt>
+          <dd>Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an Stabilität und IT-Sicherheit).</dd>
+          <dt>Empfänger</dt>
+          <dd>Functional Software, Inc. (Sentry).</dd>
+        </dl>
+      </div>
+      <div class="karte-text">
+        <h3 class="bereich-titel">Compliance- und Revisionsprotokolle</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>Dokumentierte Einwilligungen (Typ, Version und Zeitstempel), Support-Meldungen, Systemprüfprotokolle (Audit-Logs).</dd>
+          <dt>Zweck</dt>
+          <dd>Nachweis der datenschutzrechtlichen Compliance, Beantwortung von Nutzeranfragen, IT-Revisionssicherheit.</dd>
+          <dt>Rechtsgrundlage</dt>
+          <dd>Art. 6 Abs. 1 lit. c DSGVO (Erfüllung rechtlicher Dokumentationspflichten) sowie Art. 6 Abs. 1 lit. f DSGVO.</dd>
+          <dt>Empfänger</dt>
+          <dd>Supabase.</dd>
+        </dl>
+      </div>
+      <p class="karte-text">Die Erfassung von Stammdaten wie Telefonnummer, Anzeigename und Anmeldekennungen ist zur Bereitstellung des Dienstes unabdingbar. Eine Verweigerung dieser Daten schließt den Abschluss eines Nutzungsvertrages und die Kontoführung aus. Demgegenüber stehen freiwillig hinterlegte Parameter wie Profilfotos oder Campus-Zugehörigkeiten, deren Wegfall lediglich die Inanspruchnahme der jeweiligen Zusatzfunktion verhindert.</p>
+    </section>
+
+    <h2 class="abschnitt-titel">4. Spezifische Funktions- und Datenverarbeitungsmodalitäten</h2>
+    <section class="karte">
+      <h3 class="karte-text karte-unter">4.1 Bereitstellung der Website (getdrop.chat), Server-Logfiles und Cookies</h3>
+      <div class="karte-text">
+        <p>Beim Aufruf unserer Website <a href="https://getdrop.chat">https://getdrop.chat</a> verarbeitet der eingesetzte Webserver automatisiert technische Zugriffsdaten in sogenannten Server-Logfiles. Hierzu gehören:</p>
+        <ul class="karte-liste">
+          <li>Die IP-Adresse des anfragenden Endgeräts</li>
+          <li>Datum und Uhrzeit des Zugriffs</li>
+          <li>Die aufgerufene Seite bzw. URL und Dateiname</li>
+          <li>Die übertragene Datenmenge und der HTTP-Statuscode</li>
+          <li>Der verwendete Browser nebst Softwareversion sowie das Betriebssystem des Endgeräts</li>
+          <li>Die zuvor besuchte Internetseite (Referrer-URL)</li>
+        </ul>
+      </div>
+      <p class="karte-text">Die Verarbeitung dieser Daten erfolgt auf Grundlage von Art. 6 Abs. 1 lit. f DSGVO. Unser berechtigtes Interesse besteht in der technisch fehlerfreien Bereitstellung der Website, der Optimierung der Systemstabilität sowie der Erkennung und Abwehr von Cyberangriffen. Die Server-Logfiles werden rollierend nach spätestens 14 Tagen gelöscht oder irreversibel anonymisiert, es sei denn, eine längere Aufbewahrung ist zur Aufklärung konkreter Angriffe oder Störfälle rechtlich geboten.</p>
+      <p class="karte-text">Unsere Website <a href="https://getdrop.chat">https://getdrop.chat</a> wird rein informativ betrieben. Wir setzen keine zustimmungspflichtigen Cookies, Tracking-Pixel oder Werbe-Analytics-Tools ein. Es findet kein websiteübergreifendes Profiling der Besucher statt.</p>
+      <h3 class="karte-text karte-unter">4.2 Integration von Bankkonten über PSD2-Schnittstellen</h3>
+      <p class="karte-text">Nutzern steht die Möglichkeit offen, ein bestehendes Girokonto über das PSD2-Schnittstellensystem mit DropChat zu verknüpfen. Der Abruf der Kontoinformationen wird aufsichtsrechtlich und technisch durch die finAPI GmbH, Adams-Lehmann-Straße 44, 80797 München, Deutschland, realisiert. Die finAPI GmbH agiert als von der Bundesanstalt für Finanzdienstleistungsaufsicht (BaFin) beaufsichtigter Kontoinformationsdienstleister. Hinsichtlich der Authentifizierung am Online-Banking des Nutzers sowie des technischen Abrufens der Kontoumsätze bei der zuständigen Bank fungiert die finAPI GmbH als datenschutzrechtlich eigenständiger Verantwortlicher.</p>
+      <p class="karte-text">Die Eingabe sensibler Bank-Authentifizierungsmerkmale wie Anmeldename, PIN oder Transaktionsnummern (TAN) findet ausschließlich auf den gesicherten Servern der finAPI GmbH bzw. über die Schnittstelle der Bank des Nutzers statt. Die DropChat FlexKapG erlangt zu keinem Zeitpunkt Einblick in oder Zugriff auf diese Zugangsdaten. Nach erfolgreicher Autorisierung ruft DropChat Salden, IBAN, Kontoname und Umsatzzeilen über die finAPI-Programmierschnittstelle ab.</p>
+      <p class="karte-text">Da Bankbuchungsdaten und Verwendungszwecke im Einzelfall Informationen über weltanschauliche Überzeugungen, politische Haltungen, Gewerkschaftszugehörigkeiten oder gesundheitliche Belange beinhalten können, ist die Verarbeitung besonderer Kategorien personenbezogener Daten im Sinne des Art. 9 Abs. 1 DSGVO nicht auszuschließen. Diese Daten werden nicht zur Profilbildung dieser sensiblen Merkmale herangezogen, sondern rein als technische Bestandteile des vom Nutzer initiierten Buchungsabrufs verarbeitet. Die rechtliche Legitimation für die Verarbeitung dieser Begleitdaten stützt sich auf die Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO) sowie auf die ausdrückliche Einwilligung des Nutzers im Rahmen der Kontoverknüpfung gemäß Art. 9 Abs. 2 lit. a DSGVO.</p>
+      <h3 class="karte-text karte-unter">4.3 KI-gestützte Händler- und Konsumkategorisierung</h3>
+      <p class="karte-text">Um importierte Umsätze mit einheitlichen Bezeichnungen und Ausgabenkategorien zu versehen, greift DropChat auf das Sprachmodell Claude Haiku der Anthropic, PBC, zurück. Hierbei wird ein strenges Datenminimierungsverfahren angewandt: Transaktionen werden nicht vollständig exponiert, sondern es werden vor der Weiterleitung sämtliche Betragsangaben, Kontostände, Buchungszeitpunkte und Identifikatoren des Nutzers entfernt.</p>
+      <p class="karte-text">In Batches von maximal 25 Positionen werden ausschließlich der rohe Buchungstext (Verwendungszweck), der übermittelte Gegenparteiname, zwei Kennzeichen über das Vorliegen einer IBAN oder Gläubiger-Identifikationsnummer sowie ein Verzeichnis vorbekannter Firmennamen an die Schnittstelle von Anthropic transferiert. Die Verarbeitung erfolgt auf Basis von Art. 6 Abs. 1 lit. b DSGVO zur vertraglichen Bereitstellung der Ausgabenaufbereitung sowie auf Basis von Art. 6 Abs. 1 lit. f DSGVO zur Gewährleistung einer kohärenten Transaktionszuordnung. Die übermittelten Datensegmente werden von Anthropic nicht zur Modellschulung oder generellen Weiterentwicklung von Algorithmen herangezogen.</p>
+      <h3 class="karte-text karte-unter">4.4 Endgerätezugriffe und Berechtigungen nach § 165 Abs. 3 TKG 2021</h3>
+      <div class="karte-text">
+        <p>In Übereinstimmung mit § 165 Abs. 3 des österreichischen Telekommunikationsgesetzes 2021 (TKG 2021) und den Vorgaben der DSGVO greift die App nur nach einer isolierten, ausdrücklichen Betriebssystemzustimmung auf Speicherbereiche und Hardwareschnittstellen des Mobiltelefons zu. Berechtigungen für Kamera, Fotogalerie oder Adressbuchabgleich können jederzeit über die Systemeinstellungen des Endgeräts mit Wirkung für die Zukunft entzogen werden.</p>
+        <ul class="karte-liste">
+          <li>Der Zugriff auf die Fotomediathek ermöglicht das Auswählen von Rechnungsbelegen und Profilbildern.</li>
+          <li>Die Kameraberechtigung gestattet die Echtzeitaufnahme von Profilfotos sowie das Einlesen von Einladungs-QR-Codes.</li>
+          <li>Der Lesezugriff auf das Adressbuch dient dem Auffinden vorregistrierter Bekannter.</li>
+          <li>Die Benachrichtigungsberechtigung erlaubt den Empfang von System-Pushes über offene Salden oder Chat-Beiträge.</li>
+          <li>Die Zwischenablage wird ausschließlich bei einer aktiven Kopieraktion einer IBAN angesprochen.</li>
+          <li>Standortkoordinaten oder Tonaufnahmen über das Mikrofon werden von der App zu keinem Zeitpunkt abgefragt oder verwertet.</li>
+        </ul>
+      </div>
+    </section>
+
+    <h2 class="abschnitt-titel">5. Verarbeitung von Daten nicht registrierter Dritter (Art. 14 DSGVO)</h2>
+    <section class="karte">
+      <p class="karte-text">Die Nutzung von Kollaborations- und Verrechnungsfunktionen berührt unvermeidlich die Sphäre von Personen, die kein aktives DropChat-Konto unterhalten. Da diese personenbezogenen Daten nicht unmittelbar bei den Betroffenen erhoben werden, erfüllt DropChat hiermit die Informationspflichten nach Art. 14 DSGVO.</p>
+      <h3 class="karte-text karte-unter">5.1 Adressbuchabgleich und Kontaktsynchronisation</h3>
+      <p class="karte-text">Aktiviert ein Nutzer die Adressbuchsynchronisation, werden die im lokalen Telefonbuch hinterlegten Rufnummern über einen hardwarenahen kryptografischen SHA-256-Algorithmus auf dem Endgerät in Hash-Werte umgewandelt. Die App überträgt bis zu 2.000 Hashes pro Abgleich an das Backend, um das Vorhandensein korrespondierender Rufnummern in der Benutzerdatenbank abzugleichen.</p>
+      <p class="karte-text">Hashes von Personen, die kein Konto besitzen, werden nach dem Durchlaufen der Abfrageschleife im Arbeitsspeicher umgehend verworfen und nicht persistent abgelegt. Die Durchführung des Abgleichs basiert auf dem berechtigten Interesse (Art. 6 Abs. 1 lit. f DSGVO) der registrierten Nutzer und von DropChat an einer effizienten Kontaktaufnahme und Netzwerkbildung.</p>
+      <h3 class="karte-text karte-unter">5.2 Schattenkontakte im Verrechnungswesen</h3>
+      <p class="karte-text">Möchte ein Nutzer eine Rechnung mit einer Person aufteilen, die die App nicht installiert hat, kann er diesen Teilnehmer manuell unter Vergabe eines Kontaktnamens und einer Rufnummer anlegen. Hierdurch entsteht in der Datenbankstruktur ein gesonderter Datensatz für diesen Schattenkontakt, dessen Rufnummer gehasht vorgehalten und mit den geteilten Ausgaben, Rechnungsanteilen und Saldenbewegungen verknüpft wird.</p>
+      <p class="karte-text">Zweck dieser Erfassung ist die rechnerisch korrekte Ermittlung des Gesamtsaldos einer Ausgabengruppe (Art. 6 Abs. 1 lit. f DSGVO). Registriert sich die betroffene Person zu einem späteren Zeitpunkt selbst bei DropChat, wird dieser Schattenkontakt über den Abgleich des Telefonnummern-Hashes automatisiert mit dem neu eröffneten Benutzerkonto zusammengeführt, sodass die bestehenden Saldenhistorien nahtlos übernommen werden. Schattenkontakte unterliegen einer automatisierten Löschfrist und werden nach Ablauf vorgegebener Inaktivitätsfristen gelöscht, sofern keine Registrierung erfolgt.</p>
+      <h3 class="karte-text karte-unter">5.3 Zahlungs-Gegenparteien aus Kontobuchungen</h3>
+      <p class="karte-text">Im Zuge des Abrufs von Transaktionen über das angebundene Bankkonto werden Namen und IBANs Dritter verarbeitet, die als Auftraggeber oder Empfänger auf dem Girokonto des Nutzers aufscheinen. Diese Parameter werden gespeichert, um dem Nutzer die Identifikation seiner Ausgabenposten zu ermöglichen sowie um über einen automatisierten Abgleich mit registrierten Chat-Partnern Rückzahlungen offener Schulden zu erkennen. Die Verarbeitung erfolgt auf Basis berechtigter Interessen (Art. 6 Abs. 1 lit. f DSGVO) zur Abwicklung privater Finanzdokumentationen.</p>
+      <h3 class="karte-text karte-unter">5.4 Zentrales Verzeichnis für Händlerzuordnungen</h3>
+      <p class="karte-text">Zur Vermeidung wiederholter KI-Abfragen betreibt DropChat ein systemweites Schlüsselverzeichnis für die Händlererkennung, in dem IBANs, Gläubiger-Identifikationsnummern oder Textfragmente bekannten Firmen und Anbietern zugeordnet sind. Sofern eine Privatperson als gewerblicher Zahlungsempfänger fehlinterpretiert wird, kann deren IBAN vorübergehend in diesem Schlüsselverzeichnis erfasst werden. Die Rechtsgrundlage bildet das berechtigte Interesse an einer performanten und konsistenten Händlererkennung nach Art. 6 Abs. 1 lit. f DSGVO.</p>
+    </section>
+
+    <h2 class="abschnitt-titel">6. Automatisierte Entscheidungsfindung und Profiling (Art. 22 DSGVO)</h2>
+    <section class="karte">
+      <p class="karte-text">DropChat führt eine vollautomatisierte Auswertung des Nutzungsverhaltens durch, die periodisch über die Konditionen des App-Zugangs entscheidet.</p>
+      <h3 class="karte-text karte-unter">6.1 Logik und Ausgestaltung des Bewertungsalgorithmus</h3>
+      <div class="karte-text">
+        <p>Ein interner Algorithmus analysiert monatlich das Interaktionsniveau jedes Kontos. Zu den verarbeiteten Parametern zählen:</p>
+        <ul class="karte-liste">
+          <li>Die Häufigkeit geöffneter Ansichten und die dokumentierte Verweildauer.</li>
+          <li>Die Anzahl aktiv geteilter Ausgaben sowie Interaktionen in Chats.</li>
+          <li>Die Häufigkeit, mit der geteilte Ausgaben von Kontakten eingesehen wurden.</li>
+        </ul>
+      </div>
+      <p class="karte-text">Aus diesen Verhaltensmetriken aggregiert das System einen Aktivitäts-Score. Auf Basis dieses Scores stuft der Algorithmus den Nutzer ohne menschliches Eingreifen in das Ergebnis „Abonnement erforderlich“ oder „Gratis-Zugang verbleibend“ ein.</p>
+      <h3 class="karte-text karte-unter">6.2 Rechtliche Wirkung und Schutzgarantien</h3>
+      <p class="karte-text">Die Einstufung entfaltet vertragliche Konsequenzen: Nutzer mit dem Ergebnis „Abonnement erforderlich“ werden zur Fortsetzung bestimmter Premium- und Verrechnungsfunktionen zum Abschluss eines entgeltlichen Abonnements aufgefordert, während bei der Einstufung „Gratis-Zugang verbleibend“ die unentgeltliche Weiternutzung eingeräumt wird.</p>
+      <p class="karte-text">Diese automatisierte Entscheidung ist gemäß Art. 22 Abs. 2 lit. a DSGVO für den Abschluss bzw. die Erfüllung des Nutzungsvertrags erforderlich. Da die Bereitstellung der Applikation im Basissegment unentgeltlich erfolgt, dient das Verfahren der verhältnismäßigen Steuerung von Infrastrukturkosten und Tarifstrukturen gemäß § 2 Abs. 4 der AGB.</p>
+      <p class="karte-text">Zur Wahrung der Rechte, Freiheiten und berechtigten Interessen der betroffenen Personen räumt DropChat nach Art. 22 Abs. 3 DSGVO das Recht ein, eine manuelle Überprüfung durch eine zuständige Person zu erwirken, den eigenen Standpunkt darzulegen und die automatisierte Entscheidung anzufechten. Betroffene können diese Rechte über die Adresse <a href="mailto:info@getdrop.chat">info@getdrop.chat</a> geltend machen.</p>
+    </section>
+
+    <h2 class="abschnitt-titel">7. Empfängerkategorien und internationale Datentransfers</h2>
+    <section class="karte">
+      <p class="karte-text">Zur Erbringung der Dienstleistungen bindet DropChat externe Dienstleister ein, die personenbezogene Daten im Rahmen einer Auftragsverarbeitung gemäß Art. 28 DSGVO oder als eigenständige Verantwortliche verarbeiten.</p>
+      <div class="karte-text">
+        <h3 class="bereich-titel">Supabase, Inc. (Sitz: 970 Toa Payoh North, Singapur / USA)</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>Gesamte Anwendungsdatenbank, Benutzerkonten und Authentifizierung, hochgeladene Quittungsbilder und Belege, technische Audit-Protokolle.</dd>
+          <dt>Zweck</dt>
+          <dd>Primäre Cloud- und Backend-Infrastruktur, Datenspeicherung und Kontoverwaltung.</dd>
+          <dt>Transfergrundlage</dt>
+          <dd>Standardvertragsklauseln (SCC) der Europäischen Kommission.</dd>
+        </dl>
+      </div>
+      <div class="karte-text">
+        <h3 class="bereich-titel">finAPI GmbH (Sitz: Adams-Lehmann-Str. 44, 80797 München, Deutschland)</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>Bank-Login, Kontostände, Einzelumsätze, Kontoinhabername, IBAN.</dd>
+          <dt>Zweck</dt>
+          <dd>Aufsichtsrechtlich lizenzierter Kontoinformationsdienst nach PSD2 zum Auslesen von Kontobewegungen.</dd>
+          <dt>Transfergrundlage</dt>
+          <dd>Entfällt; Datenverarbeitung findet ausschließlich in zertifizierten Rechenzentren innerhalb Deutschlands statt.</dd>
+        </dl>
+      </div>
+      <div class="karte-text">
+        <h3 class="bereich-titel">Anthropic, PBC (Sitz: 548 Market St, San Francisco, CA 94104, USA)</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>Buchungstexte, Namen der Gegenpartei, Indikatoren für IBAN/Gläubiger-ID (keine Beträge, keine IBANs, keine Personen-IDs).</dd>
+          <dt>Zweck</dt>
+          <dd>KI-gestützte Erkennung von Händlernamen und automatische Zuweisung von Ausgabenkategorien.</dd>
+          <dt>Transfergrundlage</dt>
+          <dd>Zertifizierung unter dem EU-US Data Privacy Framework (DPF) sowie Standardvertragsklauseln.</dd>
+        </dl>
+      </div>
+      <div class="karte-text">
+        <h3 class="bereich-titel">650 Industries, Inc. (Expo) (Sitz: Palo Alto, CA, USA)</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>Push-Gerätetoken, Absendername, Nachrichtenanfang (maximal 40 Zeichen), Betragsangaben bei Zahlungsaufforderungen.</dd>
+          <dt>Zweck</dt>
+          <dd>Technisches Routing von Push-Mitteilungen und Verteilung von App-Aktualisierungen.</dd>
+          <dt>Transfergrundlage</dt>
+          <dd>EU-US Data Privacy Framework (DPF) und Standardvertragsklauseln.</dd>
+        </dl>
+      </div>
+      <div class="karte-text">
+        <h3 class="bereich-titel">Apple Inc. (Cupertino, CA, USA) / Google LLC (Mountain View, CA, USA)</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>Push-Inhalte, systemspezifische Geräte-Token, IP-Adresse, Installations- und Store-Metadaten.</dd>
+          <dt>Zweck</dt>
+          <dd>Auslieferung von Push-Nachrichten an iOS- und Android-Endgeräte sowie App-Bereitstellung.</dd>
+          <dt>Transfergrundlage</dt>
+          <dd>Zertifizierung unter dem EU-US Data Privacy Framework (DPF).</dd>
+        </dl>
+      </div>
+      <div class="karte-text">
+        <h3 class="bereich-titel">Functional Software, Inc. (Sentry) (Sitz: San Francisco, CA, USA)</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>Pseudonyme Personen-Kennung, Gerätedaten, Betriebssystemversion, App-Version, Fehlermeldungen, maskierte IP-Adresse.</dd>
+          <dt>Zweck</dt>
+          <dd>Echtzeit-Erkennung von Softwarefehlern, Fehleranalysen und Performance-Überwachung.</dd>
+          <dt>Transfergrundlage</dt>
+          <dd>EU-US Data Privacy Framework (DPF) und Standardvertragsklauseln.</dd>
+        </dl>
+      </div>
+      <div class="karte-text">
+        <h3 class="bereich-titel">Zoho Corporation B.V. (Sitz: Beneluxlaan 4B, 3527 HT Utrecht, Niederlande)</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>E-Mail-Adresse, Bestätigungscodes, Transaktions- und System-E-Mails.</dd>
+          <dt>Zweck</dt>
+          <dd>Zuverlässiger Versand von Anmelde-Mails, Passwort-Rücksetzungen und Hochschul-Verifizierungscodes.</dd>
+          <dt>Transfergrundlage</dt>
+          <dd>Entfällt; Datenverarbeitung findet in Rechenzentren innerhalb der Europäischen Union statt.</dd>
+        </dl>
+      </div>
+      <div class="karte-text">
+        <h3 class="bereich-titel">Twilio Inc. (Sitz: 101 Spear Street, 1st Floor, San Francisco, CA 94105, USA)</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>Mobilfunknummer des Nutzers, numerischer Verifizierungscode (OTP).</dd>
+          <dt>Zweck</dt>
+          <dd>Weltweiter Versand von Sicherheits- und Anmeldecodes per SMS.</dd>
+          <dt>Transfergrundlage</dt>
+          <dd>Zertifizierung unter dem EU-US Data Privacy Framework (DPF) sowie Standardvertragsklauseln.</dd>
+        </dl>
+      </div>
+      <div class="karte-text">
+        <h3 class="bereich-titel">Google LLC (Favicon Service) (Sitz: Mountain View, CA, USA)</h3>
+        <dl class="bereich">
+          <dt>Verarbeitete Daten</dt>
+          <dd>Domain des jeweiligen Händlers, IP-Adresse des Mobilgeräts, Browser-Header.</dd>
+          <dt>Zweck</dt>
+          <dd>Direktes clientseitiges Nachladen von Händlersymbolen zur grafischen Ausgabenanzeige.</dd>
+          <dt>Transfergrundlage</dt>
+          <dd>Zertifizierung unter dem EU-US Data Privacy Framework (DPF).</dd>
+        </dl>
+      </div>
+      <p class="karte-text">Sofern personenbezogene Daten in ein Drittland außerhalb des Europäischen Wirtschaftsraums übermittelt werden, für welches kein Angemessenheitsbeschluss nach Art. 45 DSGVO existiert, implementiert DropChat Standardvertragsklauseln (SCC) der Europäischen Kommission gemäß Art. 46 Abs. 2 lit. c DSGVO in Verbindung mit flankierenden organisatorischen und kryptografischen Sicherungsmaßnahmen. Für US-Unternehmen wie Twilio Inc., Anthropic, PBC, Google LLC oder Apple Inc., die unter dem EU-US Data Privacy Framework zertifiziert sind, fungiert der Angemessenheitsbeschluss der Europäischen Kommission vom 10. Juli 2023 als rechtliche Transfergrundlage.</p>
+    </section>
+
+    <h2 class="abschnitt-titel">8. Speicherdauer, Löschkonzepte und Kontodeaktivierung</h2>
+    <section class="karte">
+      <p class="karte-text">DropChat speichert personenbezogene Daten nur so lange, wie es zur Erfüllung der dargelegten Verarbeitungszwecke oder aufgrund gesetzlicher Aufbewahrungspflichten erforderlich ist.</p>
+      <p class="karte-text">Im regulären App-Betrieb führt das Entfernen einer Ausgabe durch den Nutzer zu einer weichen Löschung, bei der der Datensatz mit dem Status „gelöscht“ gekennzeichnet wird. Der Datensatz bleibt in der internen Datenbankarchitektur erhalten, um betrügerische Manipulationen an kollaborativen Abrechnungen zu verhindern und im Streitfall die Verrechnungshistorie rekonstruieren zu können.</p>
+      <div class="karte-text">
+        <p>Leitet ein Nutzer über die Einstellungen die vollständige Löschung seines Benutzerkontos ein, greift eine kaskadierende Bereinigungsroutine:</p>
+        <ul class="karte-liste">
+          <li><strong>Identitäts- und Kontodaten:</strong> Das Profil, die E-Mail-Adresse, der Anzeigename, der Benutzername sowie die Telefonnummer werden vollständig und unwiderruflich aus der Datenbank und dem Authentifizierungssystem entfernt. Die Rufnummer wird für spätere Neuanmeldungen freigegeben.</li>
+          <li><strong>Bankverknüpfung:</strong> Die Verbindung bei finAPI wird gelöscht, wodurch nachgelagerte Schnittstellenabrufe augenblicklich blockiert werden.</li>
+          <li><strong>Private Verlaufsdaten:</strong> Eigene Ausgaben („Drops“), Kontoeingänge, hochgeladene Quittungsfotos im privaten Speicher, Profilbilder, Reaktionen und Telemetriedaten werden physisch aus der Primärdatenbank gelöscht.</li>
+          <li><strong>Kollaborative Chat- und Saldobestände:</strong> Nachrichten, erfasste Ausgabenforderungen, Rechnungsaufteilungen und Saldenbewegungen innerhalb bestehender Ausgabengruppen bleiben für die verbleibenden Gruppenmitglieder erhalten. Um den Bezug zur Person aufzuheben, wird der Verfassername systemweit durch den statischen Platzhalter „Gelöschtes Konto“ pseudonymisiert.</li>
+        </ul>
+      </div>
+      <p class="karte-text">Die fortdauernde Speicherung der anonymisierten Salden- und Forderungsbewegungen nach der Kontoschließung stützt sich auf Art. 6 Abs. 1 lit. f DSGVO: Sie dient dem überwiegenden berechtigten Interesse der verbliebenen Chat- und Gruppenmitglieder, einen lückenlosen, rechnerischen Nachweis über beglichene oder noch offene Verbindlichkeiten und geteilte Gruppenausgaben zu behalten.</p>
+    </section>
+
+    <h2 class="abschnitt-titel">9. Rechte der betroffenen Personen und Aufsichtsbehörde</h2>
+    <section class="karte">
+      <div class="karte-text">
+        <p>Jedem Betroffenen stehen hinsichtlich der ihn betreffenden Verarbeitungen folgende Rechte nach der DSGVO zu:</p>
+        <ul class="karte-liste">
+          <li><strong>Recht auf Auskunft (Art. 15 DSGVO):</strong> Betroffene können jederzeit eine Bestätigung darüber verlangen, ob personenbezogene Daten verarbeitet werden, sowie Auskunft über Verarbeitungszwecke, Datenkategorien, Empfänger und Speicherdauern einfordern.</li>
+          <li><strong>Recht auf Berichtigung (Art. 16 DSGVO):</strong> Bei Vorliegen unrichtiger oder unvollständiger Stammdaten besteht das Recht auf unmittelbare Berichtigung.</li>
+          <li><strong>Recht auf Löschung (Art. 17 DSGVO):</strong> Das Recht auf Tilgung gespeicherter Daten („Recht auf Vergessenwerden“), sofern der Verarbeitungszweck entfallen ist, eine Einwilligung widerrufen wurde oder die Verarbeitung unrechtmäßig erfolgte.</li>
+          <li><strong>Recht auf Einschränkung der Verarbeitung (Art. 18 DSGVO):</strong> Die Möglichkeit, eine vorübergehende Aussetzung der Verarbeitung zu bewirken, etwa während der Prüfung der Richtigkeit bestrittener Daten.</li>
+          <li><strong>Recht auf Datenübertragbarkeit (Art. 20 DSGVO):</strong> Das Recht, die bereitgestellten Daten in einem strukturierten, gängigen und maschinenlesbaren Format zu erhalten oder an einen Dritten übermitteln zu lassen.</li>
+          <li><strong>Recht auf Widerspruch (Art. 21 DSGVO):</strong> Das Recht, Verarbeitungen, die sich auf ein berechtigtes Interesse nach Art. 6 Abs. 1 lit. f DSGVO stützen, aus Gründen, die sich aus der besonderen Situation des Nutzers ergeben, jederzeit zu widersprechen.</li>
+          <li><strong>Recht auf Widerruf erteilter Einwilligungen (Art. 7 Abs. 3 DSGVO):</strong> Jede freiwillig erteilte Einwilligung kann jederzeit ohne Angabe von Gründen mit Wirkung für die Zukunft widerrufen werden.</li>
+        </ul>
+      </div>
+      <p class="karte-text">Zur Ausübung dieser Betroffenenrechte genügt eine formlose Kontaktaufnahme per E-Mail an: <a href="mailto:info@getdrop.chat">info@getdrop.chat</a>.</p>
+      <div class="karte-text">
+        <p>Unbeschadet anderweitiger behördlicher oder gerichtlicher Rechtsbehelfe besteht gemäß Art. 77 DSGVO ein Beschwerderecht bei einer zuständigen Aufsichtsbehörde, insbesondere in dem EU-Mitgliedstaat des gewöhnlichen Aufenthaltsorts oder des Orts des mutmaßlichen Verstoßes. Die für die Betreiberin am Unternehmenssitz zuständige Aufsichtsbehörde ist die:</p>
+        <p class="karte-anschrift">
+          <strong>Österreichische Datenschutzbehörde (DSB)</strong><br />
+          Barichgasse 40–42, 1030 Wien, Österreich<br />
+          Telefon: <a href="tel:+43152152">+43 1 52 152-0</a><br />
+          E-Mail: <a href="mailto:dsb@dsb.gv.at">dsb@dsb.gv.at</a><br />
+          Webportal: <a href="https://www.dsb.gv.at">https://www.dsb.gv.at</a>
+        </p>
       </div>
     </section>
   </div>

@@ -701,6 +701,86 @@ body {
   border-top: 1px solid var(--border);
 }
 
+/* ── Längere Rechtstexte (AGB, Datenschutzerklärung) ───────── */
+
+.karte-text p + p,
+.karte-text p + .karte-liste {
+  margin-top: 10px;
+}
+
+.karte-text a {
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.karte-text a:hover,
+.karte-text a:focus-visible {
+  text-decoration: underline;
+}
+
+.karte-text strong {
+  color: var(--text-1);
+  font-weight: 700;
+}
+
+.karte-liste {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.karte-liste li + li {
+  margin-top: 6px;
+}
+
+.karte-anschrift {
+  line-height: 1.7;
+}
+
+/* Unterabschnitt (z. B. „4.1 …“) innerhalb einer Karte. */
+.karte-unter {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-1);
+  background: var(--bg-2);
+}
+
+/* Verarbeitungsbereich / Empfänger: Titel + Daten, Zweck, Rechtsgrundlage … */
+.bereich-titel {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-1);
+  margin-bottom: 8px;
+}
+
+.bereich {
+  margin: 0;
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 6px 14px;
+}
+
+.bereich dt {
+  font-weight: 600;
+  color: var(--text-3);
+}
+
+.bereich dd {
+  margin: 0;
+}
+
+@media (max-width: 480px) {
+  .bereich {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .bereich dd + dt {
+    margin-top: 8px;
+  }
+}
+
 /* Beschriftung/Wert-Zeile – entspricht MenuRow in der App. */
 .zeile {
   display: flex;
