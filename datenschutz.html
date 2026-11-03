@@ -236,7 +236,7 @@
           <dt>Verarbeitete Daten</dt>
           <dd>Aufgerufene App-Ansichten, Verweildauern, Abbruchschritte im Onboarding, Interaktionsschritte bei der Bankanbindung, Teilen-Ereignisse.</dd>
           <dt>Zweck</dt>
-          <dd>Erkennung von Bedienproblemen, Optimierung der App-Performance und Datenbasis für Nutzungseinstufungen.</dd>
+          <dd>Erkennung von Bedienproblemen, Optimierung der App-Performance und Feststellung der letzten Nutzung für die Aktivitätsprüfung der Bankverbindung (Abschnitt 6).</dd>
           <dt>Rechtsgrundlage</dt>
           <dd>Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an Stabilität und Benutzerfreundlichkeit).</dd>
           <dt>Empfänger</dt>
@@ -244,16 +244,16 @@
         </dl>
       </div>
       <div class="karte-text">
-        <h3 class="bereich-titel">Nutzungsbasierte Kontobewertung</h3>
+        <h3 class="bereich-titel">Aktivitätsprüfung der Bankverbindung</h3>
         <dl class="bereich">
           <dt>Verarbeitete Daten</dt>
-          <dd>Nutzungsmetriken, Aktivitäts-Score, Einstufungsergebnis („Abonnement erforderlich“ bzw. „Gratis-Zugang verbleibend“).</dd>
+          <dd>Zeitpunkt der letzten Nutzung der App, Status der Bankverbindung.</dd>
           <dt>Zweck</dt>
-          <dd>Periodische Prüfung der weiteren unentgeltlichen Nutzbarkeit der App.</dd>
+          <dd>Automatische Trennung der Bankverbindung bei Inaktivität (siehe Abschnitt 6).</dd>
           <dt>Rechtsgrundlage</dt>
-          <dd>Art. 6 Abs. 1 lit. b i.V.m. Art. 22 Abs. 2 lit. a DSGVO.</dd>
+          <dd>Art. 6 Abs. 1 lit. b DSGVO (Vertragserfüllung) i.V.m. Art. 22 Abs. 2 lit. a DSGVO.</dd>
           <dt>Empfänger</dt>
-          <dd>Supabase.</dd>
+          <dd>Supabase, finAPI GmbH (Löschung der Bankverbindung).</dd>
         </dl>
       </div>
       <div class="karte-text">
@@ -337,23 +337,22 @@
       <p class="karte-text">Zur Vermeidung wiederholter KI-Abfragen betreibt DropChat ein systemweites Schlüsselverzeichnis für die Händlererkennung, in dem IBANs, Gläubiger-Identifikationsnummern oder Textfragmente bekannten Firmen und Anbietern zugeordnet sind. Sofern eine Privatperson als gewerblicher Zahlungsempfänger fehlinterpretiert wird, kann deren IBAN vorübergehend in diesem Schlüsselverzeichnis erfasst werden. Die Rechtsgrundlage bildet das berechtigte Interesse an einer performanten und konsistenten Händlererkennung nach Art. 6 Abs. 1 lit. f DSGVO.</p>
     </section>
 
-    <h2 class="abschnitt-titel">6. Automatisierte Entscheidungsfindung und Profiling (Art. 22 DSGVO)</h2>
+    <h2 class="abschnitt-titel">6. Automatisierte Entscheidung: Trennung inaktiver Bankverbindungen (Art. 22 DSGVO)</h2>
     <section class="karte">
-      <p class="karte-text">DropChat führt eine vollautomatisierte Auswertung des Nutzungsverhaltens durch, die periodisch über die Konditionen des App-Zugangs entscheidet.</p>
-      <h3 class="karte-text karte-unter">6.1 Logik und Ausgestaltung des Bewertungsalgorithmus</h3>
+      <p class="karte-text">DropChat trennt die Verbindung zu einem Bankkonto automatisch, wenn das Benutzerkonto längere Zeit nicht genutzt wurde. Ein Abonnement oder eine sonstige Einstufung des Nutzers ist damit nicht verbunden; die übrige Nutzung der App bleibt unverändert und unentgeltlich.</p>
+      <h3 class="karte-text karte-unter">6.1 Ablauf</h3>
       <div class="karte-text">
-        <p>Ein interner Algorithmus analysiert monatlich das Interaktionsniveau jedes Kontos. Zu den verarbeiteten Parametern zählen:</p>
+        <p>Am letzten Tag jedes Kalendermonats prüft das System für jedes Benutzerkonto mit aktiver Bankverbindung, wann die App zuletzt genutzt wurde. Maßgeblich ist ausschließlich der Zeitpunkt des letzten Öffnens der App; weitere Verhaltensdaten werden dafür nicht ausgewertet.</p>
         <ul class="karte-liste">
-          <li>Die Häufigkeit geöffneter Ansichten und die dokumentierte Verweildauer.</li>
-          <li>Die Anzahl aktiv geteilter Ausgaben sowie Interaktionen in Chats.</li>
-          <li>Die Häufigkeit, mit der geteilte Ausgaben von Kontakten eingesehen wurden.</li>
+          <li>Wurde die App seit mindestens 10 Tagen nicht genutzt, gilt das Benutzerkonto als inaktiv.</li>
+          <li>Bei inaktiven Benutzerkonten wird die Bankverbindung ohne menschliches Eingreifen getrennt und der zugehörige Zugang bei der finAPI GmbH gelöscht. Es werden danach keine weiteren Kontodaten abgerufen.</li>
+          <li>Bereits importierte Ausgaben, Eingänge, Chats und Salden bleiben erhalten.</li>
         </ul>
       </div>
-      <p class="karte-text">Aus diesen Verhaltensmetriken aggregiert das System einen Aktivitäts-Score. Auf Basis dieses Scores stuft der Algorithmus den Nutzer ohne menschliches Eingreifen in das Ergebnis „Abonnement erforderlich“ oder „Gratis-Zugang verbleibend“ ein.</p>
-      <h3 class="karte-text karte-unter">6.2 Rechtliche Wirkung und Schutzgarantien</h3>
-      <p class="karte-text">Die Einstufung entfaltet vertragliche Konsequenzen: Nutzer mit dem Ergebnis „Abonnement erforderlich“ werden zur Fortsetzung bestimmter Premium- und Verrechnungsfunktionen zum Abschluss eines entgeltlichen Abonnements aufgefordert, während bei der Einstufung „Gratis-Zugang verbleibend“ die unentgeltliche Weiternutzung eingeräumt wird.</p>
-      <p class="karte-text">Diese automatisierte Entscheidung ist gemäß Art. 22 Abs. 2 lit. a DSGVO für den Abschluss bzw. die Erfüllung des Nutzungsvertrags erforderlich. Da die Bereitstellung der Applikation im Basissegment unentgeltlich erfolgt, dient das Verfahren der verhältnismäßigen Steuerung von Infrastrukturkosten und Tarifstrukturen gemäß § 2 Abs. 4 der AGB.</p>
-      <p class="karte-text">Zur Wahrung der Rechte, Freiheiten und berechtigten Interessen der betroffenen Personen räumt DropChat nach Art. 22 Abs. 3 DSGVO das Recht ein, eine manuelle Überprüfung durch eine zuständige Person zu erwirken, den eigenen Standpunkt darzulegen und die automatisierte Entscheidung anzufechten. Betroffene können diese Rechte über die Adresse <a href="mailto:info@getdrop.chat">info@getdrop.chat</a> geltend machen.</p>
+      <h3 class="karte-text karte-unter">6.2 Grund, Rechtsgrundlage und Schutzgarantien</h3>
+      <p class="karte-text">Der Abruf von Kontoinformationen über die finAPI GmbH verursacht für jedes verbundene Konto laufende Kosten je Kalendermonat. Die Trennung nicht genutzter Verbindungen ist erforderlich, um die App unentgeltlich anbieten zu können, und dient zugleich der Datenminimierung, da für inaktive Nutzer keine Kontodaten mehr abgerufen werden. Die Entscheidung ist gemäß Art. 22 Abs. 2 lit. a DSGVO für die Erfüllung des Nutzungsvertrags erforderlich.</p>
+      <p class="karte-text">Die Trennung ist jederzeit umkehrbar: Der Nutzer kann sein Bankkonto in der App mit wenigen Schritten erneut verbinden.</p>
+      <p class="karte-text">Nach Art. 22 Abs. 3 DSGVO hat der Nutzer das Recht, eine Überprüfung durch eine zuständige Person zu erwirken, den eigenen Standpunkt darzulegen und die Entscheidung anzufechten. Diese Rechte können über die Adresse <a href="mailto:info@getdrop.chat">info@getdrop.chat</a> geltend gemacht werden.</p>
     </section>
 
     <h2 class="abschnitt-titel">7. Empfängerkategorien und internationale Datentransfers</h2>
