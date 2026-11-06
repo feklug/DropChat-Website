@@ -926,3 +926,67 @@ body {
   outline-offset: 3px;
   border-radius: 6px;
 }
+/* ── App laden (app/index.html) ────────────────────────────── */
+
+.laden {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 32px 24px;
+  text-align: center;
+  background: var(--bg);
+  color: var(--text-1);
+}
+
+.laden-icon {
+  width: 96px;
+  height: 96px;
+  border-radius: 22px;
+  border: 1px solid var(--border);
+}
+
+.laden h1 {
+  font-size: 28px;
+  font-weight: 800;
+  margin-top: 8px;
+}
+
+.laden p {
+  max-width: 320px;
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--text-2);
+}
+
+.laden-knoepfe {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 280px;
+  margin-top: 12px;
+}
+
+.laden-knoepfe a {
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-md);
+  background: var(--accent);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.laden-zurueck {
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+}

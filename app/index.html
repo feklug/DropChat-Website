@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>DropChat laden</title>
+<meta name="description" content="DropChat für iPhone und Android laden." />
+<meta name="theme-color" content="#FFFFFF" />
+<link rel="icon" href="../favicon.png" type="image/png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="../styles.css" />
+<script>
+  // Hier steht der Link, den Einladungen aus der App verschicken
+  // (lib/inviteShare.ts EINLADUNGS_LINK). Sobald eine App im Store ist, den
+  // Store-Link eintragen – dann leitet die Seite dorthin weiter.
+  //   iOS:     'https://apps.apple.com/app/id6799634479'
+  //   Android: 'https://play.google.com/store/apps/details?id=<paketname>'
+  var STORE = { ios: null, android: null };
+
+  var ua = navigator.userAgent;
+  var istIos = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  var ziel = istIos ? STORE.ios : /Android/.test(ua) ? STORE.android : null;
+  if (ziel) location.replace(ziel);
+</script>
+</head>
+<body>
+  <main class="laden">
+    <img class="laden-icon" src="../icon.png" alt="" />
+    <h1 id="titel">Bald verfügbar</h1>
+    <p id="text">DropChat kommt bald in den App Store und zu Google Play.</p>
+    <div class="laden-knoepfe" id="knoepfe"></div>
+    <a class="laden-zurueck" href="../index.html">Mehr über DropChat</a>
+  </main>
+  <script>
+    // Am Computer, oder der Store des eigenen Geräts ist noch nicht verfügbar.
+    (function () {
+      var knoepfe = document.getElementById('knoepfe');
+      [['App Store', STORE.ios], ['Google Play', STORE.android]].forEach(function (eintrag) {
+        if (!eintrag[1]) return;
+        var a = document.createElement('a');
+        a.href = eintrag[1];
+        a.textContent = eintrag[0];
+        knoepfe.appendChild(a);
+      });
+      if (knoepfe.children.length > 0) {
+        document.getElementById('titel').textContent = 'DropChat laden';
+        document.getElementById('text').textContent = 'Geld unter Freunden, direkt im Chat.';
+      }
+    })();
+  </script>
+</body>
+</html>
