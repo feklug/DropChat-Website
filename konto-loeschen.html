@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Konto löschen – DropChat</title>
+  <meta name="description" content="Fordere die Löschung deines DropChat-Kontos an oder lösche es direkt in den Einstellungen der App." />
+  <meta name="theme-color" content="#FFFFFF" />
+  <link rel="icon" href="favicon.png" type="image/png" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="konto-loeschen.css" />
+</head>
+<body>
+  <div class="blatt">
+    <main class="seite">
+      <header class="kopf">
+        <h1 class="kopf-titel">Konto löschen</h1>
+        <a class="schliessen" href="index.html" aria-label="Zurück zur Startseite">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 6l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+        </a>
+      </header>
+
+      <section class="karte" aria-label="Konto in der App löschen">
+        <p class="karte-text">Du kannst dein Konto direkt in der DropChat-App unter <strong>Einstellungen</strong> löschen.</p>
+      </section>
+
+      <h2 class="abschnitt-titel">Löschung über das Formular anfordern</h2>
+      <p class="loeschung-info">Alternativ kannst du hier die Löschung deines Kontos anfordern. Wir kontaktieren dich anschließend per E-Mail, um zu bestätigen, dass du dein Konto wirklich löschen möchtest. Durch das Absenden wird dein Konto noch nicht gelöscht.</p>
+
+      <form class="loeschung-formular karte" action="https://formsubmit.co/info@getdrop.chat" method="POST" accept-charset="UTF-8">
+        <input type="hidden" name="_subject" value="DropChat: Anfrage zur Kontolöschung" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="Anliegen" value="Bitte kontaktiert mich zur Bestätigung meiner Kontolöschung. Dieses Formular ist noch keine endgültige Löschbestätigung." />
+
+        <p class="loeschung-pflicht">Alle drei Felder sind Pflichtfelder. Bitte verwende die Kontaktdaten deines DropChat-Kontos.</p>
+        <label for="name">Name</label>
+        <input id="name" name="name" type="text" autocomplete="name" maxlength="120" pattern=".*\S.*" required />
+
+        <label for="email">E-Mail-Adresse</label>
+        <input id="email" name="email" type="email" autocomplete="email" maxlength="254" required />
+
+        <label for="telefon">Telefonnummer</label>
+        <input id="telefon" name="Telefonnummer" type="tel" autocomplete="tel" inputmode="tel" placeholder="z. B. +43 660 1234567" maxlength="40" pattern="[+0-9][0-9\s\(\)\.\-]{5,39}" aria-describedby="telefon-hinweis" required />
+        <p id="telefon-hinweis" class="loeschung-hinweis">Bitte mit Ländervorwahl angeben.</p>
+
+        <p class="loeschung-hinweis">Deine Angaben werden über <a href="https://formsubmit.co/privacy.pdf" target="_blank" rel="noopener noreferrer">FormSubmit</a> an <a href="mailto:info@getdrop.chat">info@getdrop.chat</a> gesendet, damit wir deine Anfrage bearbeiten und dich kontaktieren können. Weitere Informationen findest du in unserer <a href="datenschutz.html">Datenschutzerklärung</a>.</p>
+        <button class="loeschung-senden" type="submit">Kontolöschung anfordern</button>
+        <p class="loeschung-hinweis">Nach dem Absenden wirst du zur Sicherheitsprüfung und Versandbestätigung von FormSubmit weitergeleitet. Falls der Versand nicht klappt, kannst du uns direkt an <a href="mailto:info@getdrop.chat?subject=Anfrage%20zur%20Kontol%C3%B6schung">info@getdrop.chat</a> schreiben.</p>
+      </form>
+    </main>
+    <footer class="fusszeile">
+      <a href="impressum.html">Impressum</a>
+      <a href="datenschutz.html">Datenschutzerklärung</a>
+      <a href="agb.html">AGB</a>
+      <a href="konto-loeschen.html" class="aktiv" aria-current="page">Konto löschen</a>
+      <span class="fusszeile-marke">© 2026 DropChat FlexKapG</span>
+    </footer>
+  </div>
+</body>
+</html>

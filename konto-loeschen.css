@@ -1,0 +1,61 @@
+.loeschung-info {
+  padding: 0 4px 18px;
+  color: var(--text-2);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.loeschung-formular {
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.loeschung-formular label {
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.loeschung-formular input:not([type="hidden"]) {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  background: var(--bg);
+  color: var(--text-1);
+  font: inherit;
+  font-size: 16px;
+}
+
+.loeschung-pflicht,
+.loeschung-hinweis {
+  color: var(--text-2);
+  font-size: 13px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+.loeschung-hinweis a {
+  color: #6d3fd8;
+  text-underline-offset: 3px;
+}
+
+.loeschung-senden {
+  min-height: 48px;
+  margin-top: 8px;
+  padding: 12px 16px;
+  border: 1px solid var(--accent-mid);
+  border-radius: var(--r-full);
+  background: var(--accent-light);
+  color: #6d3fd8;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.loeschung-senden:hover {
+  background: var(--accent-mid);
+}
