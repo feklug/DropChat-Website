@@ -7,18 +7,23 @@
   <meta name="description" content="Fordere die Löschung deines DropChat-Kontos an oder lösche es direkt in den Einstellungen der App." />
   <meta name="theme-color" content="#FFFFFF" />
   <link rel="icon" href="favicon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="konto-loeschen.css" />
 </head>
 <body>
-  <div class="blatt">
-    <main class="seite">
-      <header class="kopf">
-        <h1 class="kopf-titel">Konto löschen</h1>
-        <a class="schliessen" href="index.html" aria-label="Zurück zur Startseite">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M4 6l5 5 5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
-        </a>
-      </header>
+  <header class="kopf">
+    <div class="kopf-innen">
+      <a class="zurueck" href="index.html" aria-label="Zurück">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 6l-6 6 6 6" /></svg>
+        <span class="zurueck-text">Zurück</span>
+      </a>
+      <h1 class="kopf-titel">Konto löschen</h1>
+    </div>
+  </header>
+
+  <main class="seite">
 
       <section class="karte" aria-label="Konto in der App löschen">
         <p class="karte-text">Du kannst dein Konto direkt in der DropChat-App unter <strong>Einstellungen</strong> löschen.</p>
@@ -47,14 +52,20 @@
         <button class="loeschung-senden" type="submit">Kontolöschung anfordern</button>
         <p class="loeschung-hinweis">Nach dem Absenden wirst du zur Sicherheitsprüfung und Versandbestätigung von FormSubmit weitergeleitet. Falls der Versand nicht klappt, kannst du uns direkt an <a href="mailto:info@getdrop.chat?subject=Anfrage%20zur%20Kontol%C3%B6schung">info@getdrop.chat</a> schreiben.</p>
       </form>
-    </main>
-    <footer class="fusszeile">
+  </main>
+
+  <footer class="fusszeile">
+    <nav class="fuss-zeile" aria-label="Rechtliches">
       <a href="impressum.html">Impressum</a>
       <a href="datenschutz.html">Datenschutzerklärung</a>
       <a href="agb.html">AGB</a>
-      <a href="konto-loeschen.html" class="aktiv" aria-current="page">Konto löschen</a>
-      <span class="fusszeile-marke">© 2026 DropChat FlexKapG</span>
-    </footer>
-  </div>
+    </nav>
+    <nav class="fuss-zeile" aria-label="Weitere Seiten">
+      <a href="konto-loeschen.html" aria-current="page">Konto löschen</a>
+      <a href="teilnahmebedingungen.html">Teilnahmebedingungen Bonusprogramm</a>
+    </nav>
+    <span class="fusszeile-marke">© 2026 DropChat FlexKapG</span>
+  </footer>
+  <script src="zurueck.js"></script>
 </body>
 </html>
