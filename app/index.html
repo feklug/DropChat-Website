@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>DropChat laden</title>
+<meta name="referrer" content="no-referrer" />
 <meta name="description" content="DropChat für iPhone und Android laden." />
 <link rel="icon" href="../favicon.png" type="image/png" />
 <meta name="theme-color" content="#FFFFFF" />
@@ -12,7 +13,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet" />
 <link rel="stylesheet" href="../styles.css" />
 <script src="../store.js"></script>
-<script>storeWeiterleiten();</script>
+<script>if (!new URLSearchParams(location.search).has('c')) storeWeiterleiten();</script>
 </head>
 <body>
   <main class="laden">
@@ -29,5 +30,6 @@
   </footer>
 
   <script>storeZeigen();</script>
+  <script src="einladung.js"></script>
 </body>
 </html>

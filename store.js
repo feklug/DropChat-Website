@@ -2,8 +2,8 @@
 // und für /app (den Link, den die Einladungen aus der App verschicken).
 //   iOS:     'https://apps.apple.com/app/id<apple-id>'
 //   Android: 'https://play.google.com/store/apps/details?id=com.feklug.dropchat'
-// Solange beides null ist, zeigen beide Seiten „Bald verfügbar“.
-var STORE = { ios: null, android: null };
+// Solange beides null ist, zeigen beide Seiten „Bald verfügbar“; fehlt nur einer, steht dort „bald“.
+var STORE = { ios: 'https://apps.apple.com/app/id6799634479', android: null };
 
 // Nur auf /app: auf dem iPhone bzw. Android direkt in den passenden Store springen.
 function storeWeiterleiten() {
@@ -13,19 +13,19 @@ function storeWeiterleiten() {
   if (ziel) location.replace(ziel);
 }
 
-// Sobald es mindestens einen Store-Link gibt: statt „Bald verfügbar“ die Knöpfe zeigen.
+// Sobald es mindestens einen Store-Link gibt: statt „Bald verfügbar“ die Knöpfe zeigen,
+// ein Store ohne Link erscheint als ausgegrauter Knopf mit „bald“.
 function storeZeigen() {
-  var eintraege = [['App Store', STORE.ios], ['Google Play', STORE.android]].filter(function (e) {
-    return e[1];
-  });
-  if (eintraege.length === 0) return;
+  if (!STORE.ios && !STORE.android) return;
   document.getElementById('titel').textContent = 'DropChat laden';
   document.getElementById('text').textContent = 'Geld unter Freunden, direkt im Chat.';
   var knoepfe = document.getElementById('knoepfe');
-  eintraege.forEach(function (e) {
-    var a = document.createElement('a');
-    a.href = e[1];
-    a.textContent = e[0];
-    knoepfe.appendChild(a);
+  [['Laden im App Store', 'iPhone – bald verfügbar', STORE.ios],
+   ['Jetzt bei Google Play', 'Android – bald verfügbar', STORE.android]].forEach(function (e) {
+    var k = document.createElement(e[2] ? 'a' : 'span');
+    if (e[2]) k.href = e[2];
+    else k.className = 'bald';
+    k.textContent = e[2] ? e[0] : e[1];
+    knoepfe.appendChild(k);
   });
 }

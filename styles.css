@@ -139,6 +139,17 @@ a {
 .laden-knoepfe a:hover {
   background: var(--akzent-dunkel);
 }
+.laden-knoepfe .bald {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  border-radius: var(--r-pille);
+  background: var(--flaeche);
+  color: var(--text-2);
+  font-size: 15px;
+  font-weight: 600;
+}
 
 /* ── Kopf einer Unterseite: Zurück und Titel (wie SeitenKopf der App) ── */
 
